@@ -95,3 +95,162 @@ body{
     font-family: "Halvetica", sans-serif;
     opacity: 0.3;
 }
+
+/* //main content */
+
+.content {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+  }
+
+.content_container{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 5px 10px 20px 5px rgba(0, 0, 0, 0.2);
+}
+.topbar {
+    color: white;
+    width: 100%;
+    background-color: rgb(42, 119, 206);
+    /* position: absolute; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    box-shadow: 5px 10px 20px 5px rgba(0, 0, 0, 0.2);
+    gap: 12%;
+    z-index: 2;
+
+}
+.profile{
+    width: 300px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+.profile_picture, .workspace_picture{
+    border: 5px solid #263c9b;
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    margin: 1% 0;
+    margin-left: 3.5%;
+}
+.workspace{
+    width: 300px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: row;
+}
+.topbar_titles, .taskbar_titles{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: "Halvetica", sans-serif;
+    font-size: larger;
+    font-weight: bold;
+    margin: 0 4%;
+}
+.taskbar{
+    color: white;
+    width: 100%;
+    background-color: rgb(42, 119, 206);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    box-shadow: 5px 10px 20px 5px rgba(0, 0, 0, 0.2);
+
+}
+.view_tasks, .add_tasks{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    transition: 0.6s ease-in-out;
+}
+.view_tasks:hover, .add_tasks:hover{
+    background-color: #4838b4;
+    cursor: pointer;
+}
+
+/* //drop down */
+@import url('https://v1.fontapi.ir/css/Vazir');
+nav {
+    position: absolute;
+    top: 14%;
+    left: 66%;
+   
+  }
+  nav .wrapper {
+    position: absolute;
+    display: none;
+    overflow: hidden;
+    background: #252426;
+    border-radius: 5px;
+  }
+  .wrapper-show {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  nav a {
+    display: flex;
+    align-items: center;
+    padding: 5px 5px;
+    margin-block: 3px;
+    text-decoration: none;
+    color: #b0b3b8;
+    border-radius: 8px;
+    transition: 0.3s;
+  }
+  nav a:hover {
+    background: #3a3b3c;
+  }
+  nav ul {
+    list-style: none;
+    width: 200px;
+    padding: 10px;
+    transition: 0.3s;
+  }
+  
+
+  .icon {
+    width: 40px;
+    height: 40px;
+    margin-left: 13px;
+    background: #ffffff1a;
+    border-radius: 50%;
+    
+  }
+.workspace_item_title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Halvetica", sans-serif;
+    margin: 0 4%;
+    padding: 0px 0px 0 20px;
+}
+.content_view{
+    display: block;
+}
+.content_nonview{
+    display: none;
+}
+.logout{
+    font-family: "Halvetica", sans-serif;
+    margin: 0 4%;
+}

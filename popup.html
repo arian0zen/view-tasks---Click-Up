@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>view tasks - click up</title>
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="stylesheet" href="styles/style.css">
+    <title>view tasks - click up</title>
 </head>
 <body>
     <div class="modal" id="modal">
@@ -27,9 +30,56 @@
     </div>
     </div>
 
-    <p id="userName">user name: </p>
-    <p id="userId">user id: </p>
+
+
+
+    <div class="content " id="content">
+        <div class="content_container">
+            <div class="topbar">
+                <div class="profile">
+                    <img src="https://attachments2.clickup.com/team_avatars/546828fb-7261-4252-b376-f980ac37ac38.blob?Expires=1677542400&Key-Pair-Id=APKAIYJRUKB5RLQWHZWQ&Signature=PBKzmJUodhCKYJqaEgaQpPI5RblNO3-nDtlVOdODDgMW6YjnDaOoYBUX4H-AkmYU8QxWY08cTtRtqG-ZtvZDAeIbUI6HHHoj-mS4Nh~dbOfPuSRQWVPIhQ-gFLCxMz-Bz0bw~YSv~xh0~E~qA3nnL4MRS00mZNsX5o2MDpuRADinC4I-ci9x~p3eDWNTEcmBZgasiYH12EcmiUGPcKX5ynZO5sSIvCjYfWRYFux-4w3WHPaiZskP1rJY38O~SS6UHT5BytJ6qp7zt6Zieyo3g2W3FUAsPb1qdYqni4Uj1CREQgkp1dBZI6XvppxPlt-fgRmPr-DnIPWBSZFGQwtb1Q__" alt=""  class="profile_picture"/>
+                    <p class="topbar_titles">Sample profile name</p>
+                </div>
+                <div class="workspace">
+                    <p id="workspace_title" class="topbar_titles">Sample workspace title</p>
+                    <img src="https://attachments2.clickup.com/team_avatars/546828fb-7261-4252-b376-f980ac37ac38.blob?Expires=1677542400&Key-Pair-Id=APKAIYJRUKB5RLQWHZWQ&Signature=PBKzmJUodhCKYJqaEgaQpPI5RblNO3-nDtlVOdODDgMW6YjnDaOoYBUX4H-AkmYU8QxWY08cTtRtqG-ZtvZDAeIbUI6HHHoj-mS4Nh~dbOfPuSRQWVPIhQ-gFLCxMz-Bz0bw~YSv~xh0~E~qA3nnL4MRS00mZNsX5o2MDpuRADinC4I-ci9x~p3eDWNTEcmBZgasiYH12EcmiUGPcKX5ynZO5sSIvCjYfWRYFux-4w3WHPaiZskP1rJY38O~SS6UHT5BytJ6qp7zt6Zieyo3g2W3FUAsPb1qdYqni4Uj1CREQgkp1dBZI6XvppxPlt-fgRmPr-DnIPWBSZFGQwtb1Q__" alt=""  class="workspace_picture"/>
+
+                    <i class='bx bx-chevron-down bx-md' id="dropdown-icon"></i>
+                </div>
+            </div>
+            <div class="taskbar" role="button" type="submit">
+                <div class="view_tasks">
+                    <p class="taskbar_titles">View tasks</p>
+                    <i class="fa-solid fa-eye fa-2x"></i>
+                </div>
+                <div class="add_tasks">
+                    <p class="taskbar_titles">Add tasks</p>
+                    <i class="fa-solid fa-plus fa-2x"></i>
+                </div>
+            </div>
+        </div>
+
+        <nav>
+            <div class="wrapper">
+                <ul class="menu-bar" id="menu-bar">
+
+                </ul>
+                <ul class="menu-bar">
+                    <li class="logout">
+                        <a href="#">
+                            <p class="logout" id="logout">Log Out</p>
+                        </a>
+                      </li>
+                </ul>
+            </div>  
+    
+        </nav>
+
+    </div>
+    
+
     
 </body>
 <script src="app.js"></script>
+<script src="style.js"></script>
 </html>
