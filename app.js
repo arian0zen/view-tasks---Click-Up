@@ -47,7 +47,6 @@ window.onload = () => {
   checkCookie();
 };
 const access_token = document.cookie.split("=")[1];
-console.log(access_token);
 const logout = document.getElementById("logout");
 logout.addEventListener("click", () =>{
   document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
@@ -64,13 +63,10 @@ submitToken.addEventListener("click", () => {
 fetch(`https://obscure-reef-59139.herokuapp.com/teams/${access_token}`)
   .then((data) => data.json())
   .then((result) => {
-    console.log(result.teams[0]);
     document.getElementById("workspace_title").innerHTML = result.teams[0].name;
     let space_list = document.getElementById("menu-bar");
-    console.log(space_list);
 
     Array.from(result.teams).forEach((team) => {
-      console.log(team.name);
       space_list.innerHTML += `<li class="workspace_item">
       <a href="#">
         <div class="">
@@ -79,5 +75,10 @@ fetch(`https://obscure-reef-59139.herokuapp.com/teams/${access_token}`)
         <p class="workspace_item_title">${team.name}</p>
       </a>
     </li>`;
-    });
+  });
+  const workspace_picture = document.getElementById('workspace_picture');
+  workspace_picture.src = `${result.teams[0].avatar}`
+  const workspace_title = document.getElementById('workspace_title');
+  workspace_title.innerText = `${result.teams[0].name}`
+
   });

@@ -11,6 +11,8 @@ btnDrop.onclick = () => {
     item.addEventListener("click", () => {
         menuWrapper.classList.remove("wrapper-show");
         document.getElementById("workspace_title").innerText = item.children[0].children[1].innerText;
+
+        document.getElementById('workspace_picture').src = item.children[0].children[0].children[0].src;
     });
 });
 };
