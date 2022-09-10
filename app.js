@@ -63,7 +63,6 @@ submitToken.addEventListener("click", () => {
 fetch(`https://obscure-reef-59139.herokuapp.com/teams/${access_token}`)
   .then((data) => data.json())
   .then((result) => {
-    document.getElementById("workspace_title").innerHTML = result.teams[0].name;
     let space_list = document.getElementById("menu-bar");
 
     Array.from(result.teams).forEach((team) => {
@@ -72,13 +71,67 @@ fetch(`https://obscure-reef-59139.herokuapp.com/teams/${access_token}`)
         <div class="">
         <img src="${team.avatar}" alt=""  class="icon"/>
         </div>
-        <p class="workspace_item_title">${team.name}</p>
+        <p class="workspace_item_title" id="${team.id}">${team.name} </p>
       </a>
     </li>`;
   });
-  const workspace_picture = document.getElementById('workspace_picture');
-  workspace_picture.src = `${result.teams[0].avatar}`
-  const workspace_title = document.getElementById('workspace_title');
-  workspace_title.innerText = `${result.teams[0].name}`
+
 
   });
+
+const btnDrop = document.querySelector("#dropdown-icon");
+const menuWrapper = document.querySelector(".wrapper");
+
+const menuBar = document.querySelector(".menu-bar");
+
+
+btnDrop.onclick = () => {
+  menuWrapper.classList.toggle("wrapper-show");
+  const workspace_item = document.getElementsByClassName("workspace_item");
+  // console.log(workspace_item);
+  Array.from(workspace_item).forEach((item)=>{
+    item.addEventListener("click", () => {
+        menuWrapper.classList.remove("wrapper-show");
+        document.getElementById("workspace_title").innerText = item.children[0].children[1].innerText;
+
+        document.getElementById('workspace_picture').src = item.children[0].children[0].children[0].src;
+        var team_id = item.children[0].children[1].id;
+
+        fetch(`https://obscure-reef-59139.herokuapp.com/spaces/${team_id}/${access_token}`)
+        .then((data) => data.json())
+        .then((result) => {
+          const spacedrop = document.getElementById('spaceList');
+          document.getElementById('selectSpace').innerText = result.spaces[0].name;
+          Array.from(result.spaces).forEach((space) =>{
+            spacedrop.innerHTML += `<li class="spaceItems">${space.name}</li>`
+            
+            const space_id = space.id;
+            fetch(`https://obscure-reef-59139.herokuapp.com/folder/${space_id}/${access_token}`)
+            .then((data) => data.json())
+            .then((result) =>{
+              const folderdrop = document.getElementById('folderList');
+              const listdrop = document.getElementById('listList');
+              Array.from(result.folders).forEach((folder) =>{
+                folderdrop.innerHTML += `<li class="spaceItems">${folder.name}</li>`
+                Array.from(folder.lists).forEach((list)=>{
+                  listdrop.innerHTML += `<li class="spaceItems">${list.name}</li>`
+                });
+                
+
+            })
+            })
+          })
+          
+
+        });
+       
+        
+        
+    });
+    
+
+
+});
+};
+
+

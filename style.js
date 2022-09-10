@@ -1,19 +1,43 @@
-const btnDrop = document.querySelector("#dropdown-icon");
-const menuWrapper = document.querySelector(".wrapper");
-
-const menuBar = document.querySelector(".menu-bar");
-
-
-btnDrop.onclick = () => {
-  menuWrapper.classList.toggle("wrapper-show");
-  const workspace_item = document.getElementsByClassName("workspace_item");
-  Array.from(workspace_item).forEach((item)=>{
-    item.addEventListener("click", () => {
-        menuWrapper.classList.remove("wrapper-show");
-        document.getElementById("workspace_title").innerText = item.children[0].children[1].innerText;
-
-        document.getElementById('workspace_picture').src = item.children[0].children[0].children[0].src;
-    });
+var linkSpace = $("#selectSpace");
+var listSpace = $(".spaceList");
+$(".selectSpace").click(function (e) {
+  e.preventDefault();
+  listSpace.slideToggle(200);
+  listSpace.find("li").click(function () {
+    var text = $(this).html();
+    var icon = '<i class="downIcon fa fa-chevron-down"></i>';
+    linkSpace.html(text + icon);
+    listSpace.slideUp(200);
+  });
 });
-};
+
+var listFolder = $(".folderList");
+var linkFolder = $("#selectFolder");
+$(".selectFolder").click(function(e) {
+  e.preventDefault();
+  listFolder.slideToggle(200);
+  listFolder.find("li").click(function () {
+    var text = $(this).html();
+    var icon = '<i class="downIcon fa fa-chevron-down"></i>';
+    linkFolder.html(text + icon);
+    listFolder.slideUp(200);
+  });
+});
+
+
+
+var listList = $(".listList");
+var linkList = $("#selectList");
+$(".selectList").click(function(e){
+  e.preventDefault();
+
+  listList.slideToggle(200);
+  listList.find("li").click(function () {
+    var text = $(this).html();
+    var icon = '<i class="downIcon fa fa-chevron-down"></i>';
+    linkList.html(text + icon);
+    listList.slideUp(200);
+  });
+
+});
 
