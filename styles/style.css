@@ -298,17 +298,17 @@ nav {
     padding-left: 30px;
   }
   
-  .spaceItems {
+  .spaceItems, .folderItems {
     padding: 0.5em;
     cursor: pointer;
   }
-  .spaceItems {
+  .spaceItems, .folderItems {
     border-radius: 3px;
   }
-  .spaceItems:focus, .spaceItems:hover {
+  .spaceItems:focus, .spaceItems:hover, .folderItems:focus, .folderItems:hover {
     background: #5e5e5e;
   }
-  .spaceItems:active {
+  .spaceItems:active, .folderItems:active {
     background: #0e0e0e;
   }
 
