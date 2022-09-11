@@ -2,6 +2,7 @@ html{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow-y: auto;
 }
 
 body{
@@ -22,7 +23,6 @@ body{
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   }
@@ -108,6 +108,7 @@ body{
   }
 
 .content_container{
+  background-color: #666666;
     height: 100%;
     width: 100%;
     position: absolute;
@@ -201,7 +202,6 @@ nav {
   nav .wrapper {
     position: absolute;
     display: none;
-    overflow: hidden;
     background: #252426;
     border-radius: 5px;
   }
@@ -266,13 +266,22 @@ nav {
     
    background-image: linear-gradient(45deg, rgb(41, 41, 41), rgb(58, 58, 58));
     color: white;
-    margin: 1em auto;
-    width: 14.5em;
-    border: 0.1em solid #c0cdd1;
-    border-radius: 8px;
+    width: 14em;
     padding: 4px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    
   }
+  .clear {
+    
+    background-image: linear-gradient(45deg, rgb(41, 41, 41), rgb(58, 58, 58));
+     color: white;
+     margin: 1em auto;
+     width: 1.7rem;
+     border-radius: 8px;
+     padding: 4px;
+     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+   }
+
   
   .mainDropdown {
     display: block;
@@ -298,18 +307,25 @@ nav {
     padding-left: 30px;
   }
   
-  .spaceItems, .folderItems {
+  .spaceItems, .folderItems, .listItems, .taskItems {
     padding: 0.5em;
     cursor: pointer;
   }
-  .spaceItems, .folderItems {
+  .spaceItems, .folderItems, .listItems, .taskItems  {
     border-radius: 3px;
   }
-  .spaceItems:focus, .spaceItems:hover, .folderItems:focus, .folderItems:hover {
+  .spaceItems:focus, .spaceItems:hover, .folderItems:focus, .folderItems:hover, .listItems:focus, .listItems:hover, .taskItems:focus, .taskItems:hover {
     background: #5e5e5e;
   }
-  .spaceItems:active, .folderItems:active {
+  .spaceItems:active, .folderItems:active, .listItems:active {
     background: #0e0e0e;
+  }
+  .taskItems{
+    height: 25px;
+    padding-top: 15px;
+    border-radius: 10px;
+    
+
   }
 
 
@@ -318,10 +334,63 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 0.9rem;  
   }
   ul{
     list-style: none;
   }
+
+/* //main task */
+.mainTasks{
+  background-color: #3a3b3c;
+  border-radius: 4px;
+  height: 500px;
+  width: 100%;
+  color: #ffffff;
+  margin-top: 4px;
+  font-size: 0.9rem;  
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-y: auto;
+
+}
+.taskTopbar{
+  padding: 11px 0;
+  padding-left: 45px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  border-bottom: 2px dashed rgb(43, 42, 42);
+}
+.taskContent{
+  padding: 11px 0;
+  padding-left: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: center;
+}
+
+li{
+  list-style: none;
+}
+
+
+.taskTitle, .task{
+  width: 40%;
+  text-align: left;
+}
+.taskDate, .assignedDate{
+  
+  width: 20%;
+  text-align: center;
+}
+.taskDue, .dueDate{
+  width: 20%;
+  text-align: center;
+}
+.taskPriority, .priority{
+  width: 20%;
+  text-align: center;
+}

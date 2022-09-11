@@ -107,9 +107,15 @@ btnDrop.onclick = () => {
       fetch(`https://obscure-reef-59139.herokuapp.com/spaces/${team_id}/${access_token}`)
       .then((data) => data.json())
       .then((result) => {
+        var array_items = document.querySelectorAll(".spaceItems");
+        if (array_items.length >= result.spaces.length){console.log("spaces.length exceeded");
+          return;
+        }
+        
         Array.from(result.spaces).forEach((space)=>{
           
           spaceList.innerHTML +=  `<li class="spaceItems" id="${space.id}">${space.name}</li>`
+          array = document.querySelectorAll(".spaceItems")
         })
     
       })
@@ -131,10 +137,17 @@ selectSpace.addEventListener("click", ()=>{
       const space_id = spaceItem.id;
       selectSpace.dataset.id = spaceItem.id;
       const folderList = document.querySelector("#folderList");
-      folderList.innerHTML = '';
+      // folderList.innerHTML = '';
       fetch(`https://obscure-reef-59139.herokuapp.com/folder/${space_id}/${access_token}`)
       .then((data) => data.json())
       .then((result) => {
+        var array_items = document.querySelectorAll(".folderItems");
+        if (array_items.length >= result.folders.length){
+          console.log("spaces.length exceeded");
+          return;
+        }
+
+
         Array.from(result.folders).forEach((folder)=>{
           
           folderList.innerHTML +=  `<li class="folderItems" id="${folder.id}">${folder.name}</li>`
@@ -156,21 +169,85 @@ selectFolder.addEventListener("click", () => {
       return;
     }
     folderItem.addEventListener("click", () => {
-      console.log(`folderItem ${folderItem.id}`);
       const folder_id = folderItem.id;
       selectFolder.dataset.id = folderItem.id;
       const listList = document.querySelector('#listList')
-      listList.innerHTML = '';
+      // listList.innerHTML = '';
       fetch(`https://obscure-reef-59139.herokuapp.com/list/${folder_id}/${access_token}`)
       .then((data) => data.json())
       .then((result) => {
+        var array_items = document.querySelectorAll(".listItems");
+        if (array_items.length >= result.lists.length){
+          console.log("spaces.length exceeded");
+          return;
+        }
+
         Array.from(result.lists).forEach((list)=>{
           
-          listList.innerHTML +=  `<li class="folderItems" id="${list.id}">${list.name}</li>`
+          listList.innerHTML +=  `<li class="listItems" id="${list.id}">${list.name}</li>`
         })
     
       })
     })
+  })
+});
+
+const selectList = document.querySelector("#selectList");
+selectList.addEventListener("click", ()=>{
+  const listItems = document.querySelectorAll(".listItems");
+  Array.from(listItems).forEach((listItem)=>{
+    if (document.getElementById("selectList").dataset.id != ''){
+      return;
+    }
+    listItem.addEventListener("click", ()=>{
+      const list_id = listItem.id;
+      selectList.dataset.id = list_id;
+      const taskLists = document.querySelector("#taskLists");
+      const dateList = document.querySelector("#dateList");
+      const dueList = document.querySelector("#dueList");
+      const priorityList = document.querySelector("#priorityList");
+      taskLists.innerHTML = '';
+      dateList.innerHTML = ''; 
+      dueList.innerHTML = ''; 
+      priorityList.innerHTML = '';
+      fetch(`https://obscure-reef-59139.herokuapp.com/task/${list_id}/${access_token}`)
+      .then((data) => data.json())
+      .then((result)=>{
+        var array_items = document.querySelectorAll('.theTitle');
+        if(array_items.length >= result.tasks.length){
+          console.log("i am exceeding");
+          return;
+        }
+        Array.from(result.tasks).forEach((task)=>{
+          var dateCreated = new Date(parseInt(task.date_created)).toLocaleDateString('en-US', {timeZone: 'Asia/Kolkata'});
+
+          var dueDate = new Date(parseInt(task.due_date)).toLocaleDateString('en-US', {timeZone: 'Asia/Kolkata'});
+          if (dueDate == "Invalid Date"){
+            dueDate = "-"
+          }
+          if(parseInt(task.due_date) < Date.now()){
+            dueList.innerHTML += `<li class="theDue taskItems" style="color:red">${dueDate}</li>`
+          } else{
+              dueList.innerHTML += `<li class="theDue taskItems">${dueDate}</li>`
+          }
+          if(task.priority == null){
+            priorityList.innerHTML += `<li class="thePriority taskItems">${"well, no rush"}</li>`
+          } else{
+            
+          priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder">${task.priority.priority}</li>`
+          }
+
+
+
+          taskLists.innerHTML += `<li class="theTitle taskItems">${task.name}</li>`
+          dateList.innerHTML += `<li class="theDate taskItems">${dateCreated}</li>`
+
+
+
+
+        })
+      })
+    });
   })
 });
 
