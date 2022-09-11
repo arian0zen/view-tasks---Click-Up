@@ -32,14 +32,12 @@ body{
 .container{
     height: 70%;
     width: 70%;
-    background-color: rgb(255, 255, 255);
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     top: 6%;
     left: 15%;
-    /* bottom: auto; */
     flex-direction: column;
     box-shadow: 5px 10px 20px 5px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
@@ -120,7 +118,7 @@ body{
 .topbar {
     color: white;
     width: 100%;
-    background-image: linear-gradient(to right, rgb(133, 71, 233), rgb(87, 187, 226));
+    background-image: linear-gradient(to right, rgb(55, 94, 145), rgb(12,80,161));
     /* position: absolute; */
     display: flex;
     justify-content: space-around;
@@ -170,7 +168,7 @@ body{
 .taskbar{
     color: white;
     width: 100%;
-    background-color: rgb(42, 119, 206);
+    background-color: rgb(0,59,126);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -184,12 +182,26 @@ body{
     justify-content: center;
     align-items: center;
     padding: 15px 0;
-    transition: 0.6s ease-in-out;
+    transition: 0.4s ease-in-out;
+    
 }
 .view_tasks:hover, .add_tasks:hover{
     background-color: #4838b4;
     cursor: pointer;
+    background: #ffffff;
+    background: linear-gradient(145deg, #003a73, #004489);
+    background: linear-gradient(145deg, #001b3b, #002047);
+    box-shadow:  30px 30px 63px #00132a,
+                 -30px -30px 63px #00295a;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
 }
+.add_tasks:hover{
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+
+}
+
 
 /* //drop down */
 @import url('https://v1.fontapi.ir/css/Vazir');
@@ -223,6 +235,11 @@ nav {
   }
   nav a:hover {
     background: #3a3b3c;
+    transform: scale(1.1);
+    transition: transform .2s ease-in-out;
+    background: linear-gradient(315deg, #252525, #2c2c2c);
+    box-shadow:  -24px -24px 45px #101010,
+                 24px 24px 45px #424242;
   }
   nav ul {
     list-style: none;
@@ -266,14 +283,21 @@ nav {
     
    background-image: linear-gradient(45deg, rgb(41, 41, 41), rgb(58, 58, 58));
     color: white;
-    width: 14em;
+    width: 11em;
     padding: 4px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     
   }
-  .clear {
+  .triangle{
+    border-top: 19px solid transparent;
+    border-bottom: 19px solid transparent;
     
-    background-image: linear-gradient(45deg, rgb(41, 41, 41), rgb(58, 58, 58));
+    border-left: 19px solid #383838;
+  }
+  .clear {
+    background: #292929;
+box-shadow:  26px 26px 52px #171717,
+             -26px -26px 52px #3b3b3b;
      color: white;
      margin: 1em auto;
      width: 1.7rem;
@@ -281,7 +305,11 @@ nav {
      padding: 4px;
      box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
    }
-
+.clear:hover{
+  background: #292929;
+box-shadow:  -50px -50px 91px #101010,
+             50px 50px 91px #424242;
+}
   
   .mainDropdown {
     display: block;
@@ -290,10 +318,14 @@ nav {
     text-decoration: none;
   }
   .mainDropdown:hover {
-    background: #474747;
+    background: #292929;
+box-shadow:  -50px -50px 91px #101010,
+             50px 50px 91px #424242;
   }
   .mainDropdown:active {
-    background: #003030;
+    background: linear-gradient(145deg, #252525, #2c2c2c);
+box-shadow:  30px 30px 63px #1a1a1a,
+             -30px -30px 63px #383838;
   }
   
   .downIcon {
@@ -310,12 +342,14 @@ nav {
   .spaceItems, .folderItems, .listItems, .taskItems {
     padding: 0.5em;
     cursor: pointer;
+    
   }
   .spaceItems, .folderItems, .listItems, .taskItems  {
     border-radius: 3px;
   }
   .spaceItems:focus, .spaceItems:hover, .folderItems:focus, .folderItems:hover, .listItems:focus, .listItems:hover, .taskItems:focus, .taskItems:hover {
     background: #5e5e5e;
+    
   }
   .spaceItems:active, .folderItems:active, .listItems:active {
     background: #0e0e0e;
@@ -324,13 +358,21 @@ nav {
     height: 25px;
     padding-top: 15px;
     border-radius: 10px;
+
     
 
+  }
+  .taskItems:hover{
+    transform: scale(1.1);
+    transition: transform .5s ease-in-out;
+    background: #303030;
+    box-shadow:  12px 12px 21px #242424,
+                 -12px -12px 21px #3c3c3c;
   }
 
 
   .selectOptions{
-    width: 100%;
+    width: 95%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -340,19 +382,26 @@ nav {
   ul{
     list-style: none;
   }
+  .selectSpace, .spaceDown{
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+
+  }
+
 
 /* //main task */
 .mainTasks{
   background-color: #3a3b3c;
   border-radius: 4px;
-  height: 500px;
-  width: 100%;
+  width: 95%;
   color: #ffffff;
   margin-top: 4px;
   font-size: 0.9rem;  
   font-family: Arial, Helvetica, sans-serif;
   overflow-y: auto;
-
+  overflow-x: hidden;
+  box-shadow: inset -10px -10px 15px rgba(7, 7, 7, 0.5),
+            inset 10px 10px 15px rgba(19, 19, 19, 0.12);
 }
 .taskTopbar{
   padding: 11px 0;
@@ -362,6 +411,7 @@ nav {
   align-items: center;
   text-align: center;
   border-bottom: 2px dashed rgb(43, 42, 42);
+  cursor: pointer;
 }
 .taskContent{
   padding: 11px 0;

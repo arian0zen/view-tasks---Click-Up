@@ -5,7 +5,7 @@ $(".selectSpace").click(function (e) {
   listSpace.slideToggle(200);
   listSpace.find("li").click(function () {
     var text = $(this).html();
-    text = text.substring(0, 19) + "...";
+    text = text.substring(0, 15) + "...";
     var icon = '<i class="downIcon fa fa-chevron-down"></i>';
     linkSpace.html(text + icon);
     listSpace.slideUp(200);
@@ -19,7 +19,7 @@ $(".selectFolder").click(function (e) {
   listFolder.slideToggle(200);
   listFolder.find("li").click(function () {
     var text = $(this).html();
-    text = text.substring(0, 19) + "...";
+    text = text.substring(0, 15) + "...";
     var icon = '<i class="downIcon fa fa-chevron-down"></i>';
     linkFolder.html(text + icon);
     listFolder.slideUp(200);
@@ -35,7 +35,7 @@ $(".selectList").click(function (e) {
   listList.find("li").click(function () {
     var text = $(this).html();
     var id = $(this).attr("id");
-    text = text.substring(0, 19) + "...";
+    text = text.substring(0, 15) + "...";
     var icon = '<i class="downIcon fa fa-chevron-down"></i>';
     linkList.html(text + icon);
     linkList.attr("data-id", id);
