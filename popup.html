@@ -54,10 +54,12 @@
                 </div>
             </div>
             <div class="taskbar" role="button" type="submit">
-                <div class="view_tasks">
+                
+                <div class="view_tasks view_tasks_active">
                     <p class="taskbar_titles">View tasks</p>
                     <i class="fa-solid fa-eye fa-2x"></i>
                 </div>
+            
                 <div class="add_tasks">
                     <p class="taskbar_titles">Add tasks</p>
                     <i class="fa-solid fa-plus fa-2x"></i>
@@ -68,20 +70,20 @@
 
                 <div class="dropdown spaceDown">
 
-                    <a href="#" class="selectSpace mainDropdown" id="selectSpace" data-id="">Select Space<i
+                    <a href="#" class="selectSpace mainDropdown wait" id="selectSpace" data-id="" role="button">Select Space<i
                             class=" downIcon fa fa-chevron-down"></i></a>
                     <ul class="js-dropdown-list spaceList" id="spaceList">
 
                     </ul>
                 </div>
                 <div class="dropdown folderDown">
-                    <a href="#" class="selectFolder mainDropdown" id="selectFolder" data-id="">Select Folder<i
+                    <a href="#" class="selectFolder mainDropdown wait" id="selectFolder" data-id="">Select Folder<i
                             class=" downIcon fa fa-chevron-down"></i></a>
                     <ul class="js-dropdown-list folderList" id="folderList">
                     </ul>
                 </div>
                 <div class="dropdown listDown">
-                    <a href="#" class="selectList mainDropdown" id="selectList" data-id="">Select List<i
+                    <a href="#" class="selectList mainDropdown wait" id="selectList" data-id="">Select List<i
                             class=" downIcon fa fa-chevron-down"></i></a>
                     <ul class="js-dropdown-list listList" id="listList">
                     </ul>
@@ -102,24 +104,25 @@
             <div class="mainTasks">
                 <div class="taskTopbar">
                     <div class="taskTitle">
-                        TITLE
+                        
+                        <p class="text_title">TITLE</p>
                     </div>
                     <div class="taskDate">
-                        CREATED
+                        <p class="text_title">CREATED</p>
                     </div>
                     <div class="taskDue">
-                        DUE DATE
+                        <p class="text_title">DUE DATE</p>
                     </div>
                     <div class="taskPriority">
-                        PRIORITY
+                        <p class="text_title">PRIORITY</p>
                     </div>
                 </div>
                 <div class="taskContent">
                     <div class="task taskLists" id="taskLists">
-                        <li class="taskItems">-- sample task --</li>
-                        <li class="taskItems">-- sample task --</li>
-                        <li class="taskItems">-- sample task --</li>
-                        <li class="taskItems">-- sample task --</li>
+                        <li class="taskItems">Loading...</li>
+                        <li class="taskItems">Loading...</li>
+                        <li class="taskItems">Loading...</li>
+                        <li class="taskItems">Loading...</li>
 
 
                     </div>

@@ -65,3 +65,20 @@ clear.addEventListener("click", () => {
   dueList.innerHTML = ''; 
   priorityList.innerHTML = '';
 });
+
+const viewTasks = document.querySelector(".view_tasks");
+const addTasks = document.querySelector(".add_tasks");
+const mainTasks = document.querySelector(".mainTasks");
+viewTasks.addEventListener("click", () => {
+  viewTasks.classList.add("view_tasks_active");
+  addTasks.classList.remove("add_tasks_active");
+  mainTasks.classList.remove("mainTasks_hidden");
+});
+
+addTasks.addEventListener("click", () => {
+  addTasks.classList.add("add_tasks_active");
+  viewTasks.classList.remove("view_tasks_active");
+  mainTasks.classList.add("mainTasks_hidden");
+
+});
+
