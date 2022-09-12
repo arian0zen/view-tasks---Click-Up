@@ -2,17 +2,21 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  max-width: 100%;
   overflow-x: hidden;
+  scrollbar-width: none; 
 }
 
 body {
   margin: 0;
   padding: 0;
   height: 550px;
-  width: 700px;
+  width: 800px;
+  max-width: 100%;
   box-sizing: border-box;
   background-color: rgb(255, 255, 255);
   overflow-x: hidden;
+  scrollbar-width: none; 
 }
 
 .modal {
