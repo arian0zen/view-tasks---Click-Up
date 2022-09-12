@@ -22,6 +22,7 @@
                 <p id="context">Authorize "view task" with</p>
                 <div class="inputs">
                     <img src="unknown.png" alt="Click Up" id="clkImage">
+                    <input type="text" id="enterEmail" name="email" placeholder="Enter your email id" autocomplete="false">
                     <input type="text" id="enterToken" name="token" placeholder="Enter your token" autocomplete="false">
                     <button type="submit" id="submitToken" href="popup.html">Authorize access token</button>
                 </div>
@@ -49,8 +50,10 @@
                 <div class="workspace">
                     <p id="workspace_title" class="topbar_titles" data-id="">Select a workspace to start with</p>
                     <img src="/profilepic.bmp" alt="" class="workspace_picture" id="workspace_picture" />
-
+                    <div id="theIcon">
                     <i class='bx bx-chevron-down bx-md' id="dropdown-icon"></i>
+                    
+                </div>
                 </div>
             </div>
             <div class="taskbar" role="button" type="submit">
@@ -93,9 +96,10 @@
                     
                 </div>
 
-                <div class="clear">
+                <div class="clear tooltip">
                     <a href="#" class="mainDropdown" data-id="" id="clear"><i
-                            class="fa-sharp fa-solid fa-trash-arrow-up "></i></a>
+                            class="fa-sharp fa-solid fa-trash-arrow-up "></i>
+                        <span class="tooltiptext">remove all</span></a>
 
                 </div>
 
@@ -112,9 +116,11 @@
                     </div>
                     <div class="taskDue">
                         <p class="text_title">DUE DATE</p>
+                        <i class='sort_d bx bx-sort-up'></i>
                     </div>
                     <div class="taskPriority">
                         <p class="text_title">PRIORITY</p>
+                        <i class='sort_p bx bx-sort-up'></i>
                     </div>
                 </div>
                 <div class="taskContent">
@@ -123,7 +129,8 @@
                         <li class="taskItems">Loading...</li>
                         <li class="taskItems">Loading...</li>
                         <li class="taskItems">Loading...</li>
-
+                        
+                        
 
                     </div>
                     <div class="assignedDate taskLists" id="dateList">
@@ -183,5 +190,6 @@
 </body>
 <script src="app.js"></script>
 <script src="style.js"></script>
+<script src="sort.js"></script>
 
 </html>

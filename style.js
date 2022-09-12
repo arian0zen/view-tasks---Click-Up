@@ -52,10 +52,15 @@ clear.addEventListener("click", () => {
   document.querySelector(
     "#selectFolder"
   ).innerHTML = `Select folder <i class="downIcon fa fa-chevron-down"></i>`;
-
+  document.querySelector(
+    "#selectFolder"
+  ).dataset.id = '';
   document.querySelector(
     "#selectList"
   ).innerHTML = `Select list <i class="downIcon fa fa-chevron-down"></i>`;
+  document.querySelector(
+    "#selectList"
+  ).dataset.id = '';
   const taskLists = document.querySelector("#taskLists");
   const dateList = document.querySelector("#dateList");
   const dueList = document.querySelector("#dueList");
@@ -64,6 +69,10 @@ clear.addEventListener("click", () => {
   dateList.innerHTML = ''; 
   dueList.innerHTML = ''; 
   priorityList.innerHTML = '';
+  const folderList = document.querySelector("#folderList");
+  folderList.innerHTML = '';
+  const listList = document.querySelector("#listList");
+  listList.innerHTML = ''; 
 });
 
 const viewTasks = document.querySelector(".view_tasks");

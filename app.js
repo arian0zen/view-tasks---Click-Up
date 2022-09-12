@@ -33,9 +33,9 @@ function checkCookie() {
       modal.style.display = "none";
 
       var access_token = window.location.href;
-      access_token = access_token.split("=");
+      access_token = access_token.split("email=");
       access_token = access_token[1];
-      console.log(access_token);
+      
       if (access_token != "" && access_token != null) {
         setCookie("token", access_token, 365);
       }
@@ -46,7 +46,13 @@ function checkCookie() {
 window.onload = () => {
   checkCookie();
 };
-const access_token = document.cookie.split("=")[1];
+
+var email_id = document.cookie.split("token=")[1];
+email_id = email_id.split("&")[0];
+email_id = email_id.replace("%40", "@");
+var access_token = document.cookie.split("&")[1];
+access_token = access_token.split("=")[1];
+access_token = access_token.split("#")[0];
 const logout = document.getElementById("logout");
 logout.addEventListener("click", () => {
   document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -91,6 +97,13 @@ btnDrop.onclick = () => {
     }
 
     item.addEventListener("click", () => {
+
+      const theIcon = document.getElementById("theIcon");
+      theIcon.innerHTML = `<i class='bx bx-x bx-lg' id='close'></i>`
+      theIcon.addEventListener("click", ()=>{
+        window.close();
+      });
+
       menuWrapper.classList.remove("wrapper-show");
       document.getElementById("workspace_title").innerText =
         item.children[0].children[1].innerText;
@@ -128,12 +141,14 @@ const selectSpace = document.querySelector("#selectSpace");
 selectSpace.addEventListener("click", () => {
   const spaceItems = document.querySelectorAll(".spaceItems");
   Array.from(spaceItems).forEach((spaceItem) => {
+    console.log("here clicked");
     if (document.getElementById("selectSpace").dataset.id != "") {
       return;
     }
     spaceItem.addEventListener("click", () => {
       console.log("Space Item Clicked");
       const space_id = spaceItem.id;
+      console.log(space_id);
       selectSpace.dataset.id = spaceItem.id;
       const folderList = document.querySelector("#folderList");
       // folderList.innerHTML = '';
@@ -167,6 +182,7 @@ selectFolder.addEventListener("click", () => {
     }
     folderItem.addEventListener("click", () => {
       const folder_id = folderItem.id;
+      console.log("bitch", folder_id);
       selectFolder.dataset.id = folderItem.id;
       const listList = document.querySelector("#listList");
       // listList.innerHTML = '';
@@ -175,6 +191,7 @@ selectFolder.addEventListener("click", () => {
       )
         .then((data) => data.json())
         .then((result) => {
+          
           var array_items = document.querySelectorAll(".listItems");
           if (array_items.length >= result.lists.length) {
             console.log("spaces.length exceeded");
@@ -207,6 +224,8 @@ selectList.addEventListener("click", () => {
       dateList.innerHTML = "";
       dueList.innerHTML = "";
       priorityList.innerHTML = "";
+      let forSortList = document.getElementById("selectList");
+      forSortList.dataset.listId = list_id;
       fetch(
         `https://obscure-reef-59139.herokuapp.com/task/${list_id}/${access_token}`
       )
@@ -218,30 +237,54 @@ selectList.addEventListener("click", () => {
             return;
           }
           Array.from(result.tasks).forEach((task) => {
-            var dateCreated = new Date(
-              parseInt(task.date_created)
-            ).toLocaleDateString("en-US", { timeZone: "Asia/Kolkata" });
+            Array.from(task.assignees).forEach((person) => {
+              if (person.email == email_id) {
+                var dateCreated = new Date(
+                  parseInt(task.date_created)
+                ).toLocaleDateString(
+                  "en-IN",
+                  { year: "numeric", month: "short", day: "numeric" },
+                  { timeZone: "Asia/Kolkata" }
+                );
 
-            var dueDate = new Date(parseInt(task.due_date)).toLocaleDateString(
-              "en-US",
-              { timeZone: "Asia/Kolkata" }
-            );
-            if (dueDate == "Invalid Date") {
-              dueDate = "-";
-            }
-            if (parseInt(task.due_date) < Date.now()) {
-              dueList.innerHTML += `<li class="theDue taskItems" style="color:red">${dueDate}</li>`;
-            } else {
-              dueList.innerHTML += `<li class="theDue taskItems">${dueDate}</li>`;
-            }
-            if (task.priority == null) {
-              priorityList.innerHTML += `<li class="thePriority taskItems">${"well, no rush"}</li>`;
-            } else {
-              priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder">${task.priority.priority}</li>`;
-            }
+                var dueDate = new Date(
+                  parseInt(task.due_date)
+                ).toLocaleDateString("en-IN", { timeZone: "Asia/Kolkata" });
+                var dueDate_coming = new Date(
+                  parseInt(task.due_date)
+                ).toLocaleDateString(
+                  "en-IN",
+                  { weekday: "long", month: "short", day: "numeric" },
+                  { timeZone: "Asia/Kolkata" }
+                );
+                if (dueDate == "Invalid Date") {
+                  dueDate = "-";
+                }
+                if (parseInt(task.due_date) < Date.now()) {
+                  dueList.innerHTML += `<li class="theDue taskItems" style="color:red">${dueDate}</li>`;
+                } else {
+                  if (dueDate_coming == "Invalid Date") {
+                    dueDate_coming = "-";
+                  }
 
-            taskLists.innerHTML += `<li class="theTitle taskItems">${task.name}</li>`;
-            dateList.innerHTML += `<li class="theDate taskItems">${dateCreated}</li>`;
+                  dueList.innerHTML += `<li class="theDue taskItems" style="color:green">${dueDate_coming}</li>`;
+                }
+                if (task.priority == null) {
+                  priorityList.innerHTML += `<li class="thePriority taskItems">${"--"}</li>`;
+                } else if (task.priority.priority == "urgent") {
+                  priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: red">${task.priority.priority}</li>`;
+                } else if (task.priority.priority == "high") {
+                  priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: yellow">${task.priority.priority}</li>`;
+                } else if (task.priority.priority == "normal") {
+                  priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: #6fddff">${task.priority.priority}</li>`;
+                } else if (task.priority.priority == "low") {
+                  priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: #d8d8d8">${task.priority.priority}</li>`;
+                }
+
+                taskLists.innerHTML += `<li class="theTitle taskItems">${task.name}</li>`;
+                dateList.innerHTML += `<li class="theDate taskItems">${dateCreated}</li>`;
+              }
+            });
           });
         });
     });
@@ -278,95 +321,115 @@ fetch(`https://obscure-reef-59139.herokuapp.com/teams/${access_token}`)
             fetch(
               `https://obscure-reef-59139.herokuapp.com/list/${folder_id}/${access_token}`
             )
-            .then((data) => data.json())
-            .then((result)=>{
-              selectList.innerHTML = `${
-                result.lists[0].name}<i class="downIcon fa fa-chevron-down"></i>`;
+              .then((data) => data.json())
+              .then((result) => {
+                selectList.innerHTML = `${result.lists[0].name}<i class="downIcon fa fa-chevron-down"></i>`;
                 let list_id = result.lists[0].id;
+                selectList.dataset.listId = list_id;
+                selectList.dataset.token = access_token;
 
                 fetch(
                   `https://obscure-reef-59139.herokuapp.com/task/${list_id}/${access_token}`
                 )
                   .then((data) => data.json())
                   .then((result) => {
-                    taskLists.innerHTML = '';
-                    dateList.innerHTML = '';
-                    dueList.innerHTML = ''; 
-                    priorityList.innerHTML = '';  
+                    taskLists.innerHTML = "";
+                    dateList.innerHTML = "";
+                    dueList.innerHTML = "";
+                    priorityList.innerHTML = "";
 
                     Array.from(result.tasks).forEach((task) => {
-                      var dateCreated = new Date(
-                        parseInt(task.date_created)
-                      ).toLocaleDateString("en-US", { timeZone: "Asia/Kolkata" });
-          
-                      var dueDate = new Date(parseInt(task.due_date)).toLocaleDateString(
-                        "en-US",
-                        { timeZone: "Asia/Kolkata" }
-                      );
-                      if (dueDate == "Invalid Date") {
-                        dueDate = "-";
-                      }
-                      if (parseInt(task.due_date) < Date.now()) {
-                        dueList.innerHTML += `<li class="theDue taskItems" style="color:red">${dueDate}</li>`;
-                      } else {
-                        dueList.innerHTML += `<li class="theDue taskItems">${dueDate}</li>`;
-                      }
-                      if (task.priority == null) {
-                        priorityList.innerHTML += `<li class="thePriority taskItems">${"well, no rush"}</li>`;
-                      } else {
-                        priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder">${task.priority.priority}</li>`;
-                      }
-          
-                      taskLists.innerHTML += `<li class="theTitle taskItems">${task.name}</li>`;
-                      dateList.innerHTML += `<li class="theDate taskItems">${dateCreated}</li>`;
+                      Array.from(task.assignees).forEach((person) => {
+                        if (person.email == email_id) {
+                          var dateCreated = new Date(
+                            parseInt(task.date_created)
+                          ).toLocaleDateString(
+                            "en-IN",
+                            { year: "numeric", month: "short", day: "numeric" },
+                            { timeZone: "Asia/Kolkata" }
+                          );
+
+                          var dueDate = new Date(
+                            parseInt(task.due_date)
+                          ).toLocaleDateString("en-IN", {
+                            timeZone: "Asia/Kolkata",
+                          });
+                          var dueDate_coming = new Date(
+                            parseInt(task.due_date)
+                          ).toLocaleDateString(
+                            "en-IN",
+                            { weekday: "long", month: "short", day: "numeric" },
+                            { timeZone: "Asia/Kolkata" }
+                          );
+                          if (dueDate == "Invalid Date") {
+                            dueDate = "-";
+                          }
+                          if (parseInt(task.due_date) < Date.now()) {
+                            dueList.innerHTML += `<li class="theDue taskItems" style="color:red">${dueDate}</li>`;
+                          } else {
+                            if (dueDate_coming == "Invalid Date") {
+                              dueDate_coming = "-";
+                            }
+
+                            dueList.innerHTML += `<li class="theDue taskItems" style="color:green">${dueDate_coming}</li>`;
+                          }
+                          if (task.priority == null) {
+                            priorityList.innerHTML += `<li class="thePriority taskItems">${"--"}</li>`;
+                          } else if (task.priority.priority == "urgent") {
+                            priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: red">${task.priority.priority}</li>`;
+                          } else if (task.priority.priority == "high") {
+                            priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: yellow">${task.priority.priority}</li>`;
+                          } else if (task.priority.priority == "normal") {
+                            priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: #6fddff">${task.priority.priority}</li>`;
+                          } else if (task.priority.priority == "low") {
+                            priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: #d8d8d8">${task.priority.priority}</li>`;
+                          }
+
+                          taskLists.innerHTML += `<li class="theTitle taskItems">${task.name}</li>`;
+                          dateList.innerHTML += `<li class="theDate taskItems">${dateCreated}</li>`;
+                        }
+                      });
                     });
                   });
-
-
-            })
+              });
           });
       });
   });
 
-
-  //fixing bug for quick click
-  let downIcon = document.querySelector('#dropdown-icon');
-  downIcon.addEventListener('click', ()=>{
-    let workspaceItems = document.querySelectorAll('.workspace_item_title');
-    Array.from(workspaceItems).forEach((item) =>{
-      item.addEventListener('click', ()=>{
-
-        setTimeout(()=>{
-          let selectSpace = document.querySelector('.selectSpace');
-        selectSpace.classList.remove('wait');
-        }, 1200);
-      });
-    })
+//fixing bug for quick click
+let downIcon = document.querySelector("#dropdown-icon");
+downIcon.addEventListener("click", () => {
+  let workspaceItems = document.querySelectorAll(".workspace_item_title");
+  Array.from(workspaceItems).forEach((item) => {
+    item.addEventListener("click", () => {
+      setTimeout(() => {
+        let selectSpace = document.querySelector(".selectSpace");
+        selectSpace.classList.remove("wait");
+      }, 1200);
+    });
   });
+});
 
-
-  document.querySelector(".selectSpace").addEventListener('click', ()=>{
-    let spaceItems = document.querySelectorAll('.spaceItems');
-    Array.from(spaceItems).forEach((item) =>{
-      item.addEventListener('click', ()=>{
-
-        setTimeout(()=>{
-          let selectFolder = document.querySelector('.selectFolder');
-        selectFolder.classList.remove('wait');
-        }, 1200);
-      });
-    })
+document.querySelector(".selectSpace").addEventListener("click", () => {
+  let spaceItems = document.querySelectorAll(".spaceItems");
+  Array.from(spaceItems).forEach((item) => {
+    item.addEventListener("click", () => {
+      setTimeout(() => {
+        let selectFolder = document.querySelector(".selectFolder");
+        selectFolder.classList.remove("wait");
+      }, 1200);
+    });
   });
+});
 
-  document.querySelector(".selectFolder").addEventListener('click', ()=>{
-    let folderItems = document.querySelectorAll('.folderItems');
-    Array.from(folderItems).forEach((item) =>{
-      item.addEventListener('click', ()=>{
-
-        setTimeout(()=>{
-          let selectList = document.querySelector('.selectList');
-        selectList.classList.remove('wait');
-        }, 1200);
-      });
-    })
+document.querySelector(".selectFolder").addEventListener("click", () => {
+  let folderItems = document.querySelectorAll(".folderItems");
+  Array.from(folderItems).forEach((item) => {
+    item.addEventListener("click", () => {
+      setTimeout(() => {
+        let selectList = document.querySelector(".selectList");
+        selectList.classList.remove("wait");
+      }, 1200);
+    });
   });
+});
