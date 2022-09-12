@@ -180,6 +180,7 @@ body{
 
 }
 .view_tasks, .add_tasks{
+  color: rgba(255, 255, 255, 0.425);
     width: 50%;
     display: flex;
     justify-content: center;
@@ -205,6 +206,7 @@ body{
 
 }
 .view_tasks_active{
+  color: white;
   border-top-right-radius: 9px;
   border-bottom-right-radius: 9px;
   background: linear-gradient(145deg, #003a73, #004489);
@@ -213,6 +215,7 @@ body{
                -30px -30px 63px #00295a;
 }
 .add_tasks_active{
+  color: white;
   border-top-left-radius: 9px;
   border-bottom-left-radius: 9px;
   background: linear-gradient(145deg, #003a73, #004489);
@@ -473,6 +476,11 @@ box-shadow:  30px 30px 63px #1a1a1a,
 .text_title:hover:after{
   width: 100%; 
   left: 0; 
+
+}
+.text_title:hover{
+  transform: scale(1.1);
+  transition: 100ms ease-in-out;
 }
 
 
