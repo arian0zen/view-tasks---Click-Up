@@ -1,3 +1,4 @@
+
 function setCookie(cname, cvalue, exdays) {
   const d = new Date();
   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
@@ -154,28 +155,31 @@ btnDrop.onclick = () => {
               dueDate = "-";
             }
             if (parseInt(task.due_date) < Date.now()) {
-              dueList.innerHTML += `<li class="theDue taskItems" style="color:red">${dueDate}</li>`;
+              dueList.innerHTML += `<li class="theDue taskItems OthertaskItems" style="color:red">${dueDate}</li>`;
             } else {
               if (dueDate_coming == "Invalid Date") {
                 dueDate_coming = "-";
               }
 
-              dueList.innerHTML += `<li class="theDue taskItems" style="color:green">${dueDate_coming}</li>`;
+              dueList.innerHTML += `<li class="theDue taskItems OthertaskItems" style="color:green">${dueDate_coming}</li>`;
             }
             if (task.priority == null) {
-              priorityList.innerHTML += `<li class="thePriority taskItems">${"--"}</li>`;
+              priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems">${"--"}</li>`;
             } else if (task.priority.priority == "urgent") {
-              priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: red">${task.priority.priority}</li>`;
+              priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: red">${task.priority.priority}</li>`;
             } else if (task.priority.priority == "high") {
-              priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: yellow">${task.priority.priority}</li>`;
+              priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: yellow">${task.priority.priority}</li>`;
             } else if (task.priority.priority == "normal") {
-              priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: #6fddff">${task.priority.priority}</li>`;
+              priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: #6fddff">${task.priority.priority}</li>`;
             } else if (task.priority.priority == "low") {
-              priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: #d8d8d8">${task.priority.priority}</li>`;
+              priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: #d8d8d8">${task.priority.priority}</li>`;
             }
 
-            taskLists.innerHTML += `<li class="theTitle taskItems">${task.name}</li>`;
-            dateList.innerHTML += `<li class="theDate taskItems">${dateCreated}</li>`;
+            taskLists.innerHTML += `<li class="theTitle taskItems taskNames" data-id="${task.id}" data-id="${task.id}"><label class="done">
+            <input type="checkbox">
+            <div class="checkmark"></div>
+          </label>${task.name}</li>`;
+            dateList.innerHTML += `<li class="theDate taskItems OthertaskItems">${dateCreated}</li>`;
           });
         });
       // all tasks
@@ -351,28 +355,31 @@ selectList.addEventListener("click", () => {
                   dueDate = "-";
                 }
                 if (parseInt(task.due_date) < Date.now()) {
-                  dueList.innerHTML += `<li class="theDue taskItems" style="color:red">${dueDate}</li>`;
+                  dueList.innerHTML += `<li class="theDue taskItems OthertaskItems" style="color:red">${dueDate}</li>`;
                 } else {
                   if (dueDate_coming == "Invalid Date") {
                     dueDate_coming = "-";
                   }
 
-                  dueList.innerHTML += `<li class="theDue taskItems" style="color:green">${dueDate_coming}</li>`;
+                  dueList.innerHTML += `<li class="theDue taskItems OthertaskItems" style="color:green">${dueDate_coming}</li>`;
                 }
                 if (task.priority == null) {
-                  priorityList.innerHTML += `<li class="thePriority taskItems">${"--"}</li>`;
+                  priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems">${"--"}</li>`;
                 } else if (task.priority.priority == "urgent") {
-                  priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: red">${task.priority.priority}</li>`;
+                  priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: red">${task.priority.priority}</li>`;
                 } else if (task.priority.priority == "high") {
-                  priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: yellow">${task.priority.priority}</li>`;
+                  priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: yellow">${task.priority.priority}</li>`;
                 } else if (task.priority.priority == "normal") {
-                  priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: #6fddff">${task.priority.priority}</li>`;
+                  priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: #6fddff">${task.priority.priority}</li>`;
                 } else if (task.priority.priority == "low") {
-                  priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: #d8d8d8">${task.priority.priority}</li>`;
+                  priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: #d8d8d8">${task.priority.priority}</li>`;
                 }
 
-                taskLists.innerHTML += `<li class="theTitle taskItems">${task.name}</li>`;
-                dateList.innerHTML += `<li class="theDate taskItems">${dateCreated}</li>`;
+                taskLists.innerHTML += `<li class="theTitle taskItems taskNames" data-id="${task.id}" data-id="${task.id}"><label class="done">
+                <input type="checkbox">
+                <div class="checkmark"></div>
+              </label>${task.name}</li>`;
+                dateList.innerHTML += `<li class="theDate taskItems OthertaskItems">${dateCreated}</li>`;
               }
             });
           });
@@ -439,28 +446,31 @@ selectFolderless.addEventListener("click", () => {
                   dueDate = "-";
                 }
                 if (parseInt(task.due_date) < Date.now()) {
-                  dueList.innerHTML += `<li class="theDue taskItems" style="color:red">${dueDate}</li>`;
+                  dueList.innerHTML += `<li class="theDue taskItems OthertaskItems" style="color:red">${dueDate}</li>`;
                 } else {
                   if (dueDate_coming == "Invalid Date") {
                     dueDate_coming = "-";
                   }
 
-                  dueList.innerHTML += `<li class="theDue taskItems" style="color:green">${dueDate_coming}</li>`;
+                  dueList.innerHTML += `<li class="theDue taskItems OthertaskItems" style="color:green">${dueDate_coming}</li>`;
                 }
                 if (task.priority == null) {
-                  priorityList.innerHTML += `<li class="thePriority taskItems">${"--"}</li>`;
+                  priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems">${"--"}</li>`;
                 } else if (task.priority.priority == "urgent") {
-                  priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: red">${task.priority.priority}</li>`;
+                  priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: red">${task.priority.priority}</li>`;
                 } else if (task.priority.priority == "high") {
-                  priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: yellow">${task.priority.priority}</li>`;
+                  priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: yellow">${task.priority.priority}</li>`;
                 } else if (task.priority.priority == "normal") {
-                  priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: #6fddff">${task.priority.priority}</li>`;
+                  priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: #6fddff">${task.priority.priority}</li>`;
                 } else if (task.priority.priority == "low") {
-                  priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: #d8d8d8">${task.priority.priority}</li>`;
+                  priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: #d8d8d8">${task.priority.priority}</li>`;
                 }
 
-                taskLists.innerHTML += `<li class="theTitle taskItems">${task.name}</li>`;
-                dateList.innerHTML += `<li class="theDate taskItems">${dateCreated}</li>`;
+                taskLists.innerHTML += `<li class="theTitle taskItems taskNames" data-id="${task.id}"><label class="done">
+                <input type="checkbox">
+                <div class="checkmark"></div>
+              </label>${task.name}</li>`;
+                dateList.innerHTML += `<li class="theDate taskItems OthertaskItems">${dateCreated}</li>`;
               }
             });
           });
@@ -517,28 +527,31 @@ clean.addEventListener("click", () => {
           dueDate = "-";
         }
         if (parseInt(task.due_date) < Date.now()) {
-          dueList.innerHTML += `<li class="theDue taskItems" style="color:red">${dueDate}</li>`;
+          dueList.innerHTML += `<li class="theDue taskItems OthertaskItems" style="color:red">${dueDate}</li>`;
         } else {
           if (dueDate_coming == "Invalid Date") {
             dueDate_coming = "-";
           }
 
-          dueList.innerHTML += `<li class="theDue taskItems" style="color:green">${dueDate_coming}</li>`;
+          dueList.innerHTML += `<li class="theDue taskItems OthertaskItems" style="color:green">${dueDate_coming}</li>`;
         }
         if (task.priority == null) {
-          priorityList.innerHTML += `<li class="thePriority taskItems">${"--"}</li>`;
+          priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems">${"--"}</li>`;
         } else if (task.priority.priority == "urgent") {
-          priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: red">${task.priority.priority}</li>`;
+          priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: red">${task.priority.priority}</li>`;
         } else if (task.priority.priority == "high") {
-          priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: yellow">${task.priority.priority}</li>`;
+          priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: yellow">${task.priority.priority}</li>`;
         } else if (task.priority.priority == "normal") {
-          priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: #6fddff">${task.priority.priority}</li>`;
+          priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: #6fddff">${task.priority.priority}</li>`;
         } else if (task.priority.priority == "low") {
-          priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: #d8d8d8">${task.priority.priority}</li>`;
+          priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: #d8d8d8">${task.priority.priority}</li>`;
         }
 
-        taskLists.innerHTML += `<li class="theTitle taskItems">${task.name}</li>`;
-        dateList.innerHTML += `<li class="theDate taskItems">${dateCreated}</li>`;
+        taskLists.innerHTML += `<li class="theTitle taskItems taskNames" data-id="${task.id}"><label class="done">
+        <input type="checkbox">
+        <div class="checkmark"></div>
+      </label>${task.name}</li>`;
+        dateList.innerHTML += `<li class="theDate taskItems OthertaskItems">${dateCreated}</li>`;
       });
     });
 });
@@ -596,31 +609,36 @@ fetch(`https://obscure-reef-59139.herokuapp.com/teams/${access_token}`)
             dueDate = "-";
           }
           if (parseInt(task.due_date) < Date.now()) {
-            dueList.innerHTML += `<li class="theDue taskItems" style="color:red">${dueDate}</li>`;
+            dueList.innerHTML += `<li class="theDue taskItems OthertaskItems" style="color:red">${dueDate}</li>`;
           } else {
             if (dueDate_coming == "Invalid Date") {
               dueDate_coming = "-";
             }
 
-            dueList.innerHTML += `<li class="theDue taskItems" style="color:green">${dueDate_coming}</li>`;
+            dueList.innerHTML += `<li class="theDue taskItems OthertaskItems" style="color:green">${dueDate_coming}</li>`;
           }
           if (task.priority == null) {
-            priorityList.innerHTML += `<li class="thePriority taskItems">${"--"}</li>`;
+            priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems">${"--"}</li>`;
           } else if (task.priority.priority == "urgent") {
-            priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: red">${task.priority.priority}</li>`;
+            priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: red">${task.priority.priority}</li>`;
           } else if (task.priority.priority == "high") {
-            priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: yellow">${task.priority.priority}</li>`;
+            priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: yellow">${task.priority.priority}</li>`;
           } else if (task.priority.priority == "normal") {
-            priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: #6fddff">${task.priority.priority}</li>`;
+            priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: #6fddff">${task.priority.priority}</li>`;
           } else if (task.priority.priority == "low") {
-            priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: #d8d8d8">${task.priority.priority}</li>`;
+            priorityList.innerHTML += `<li class="thePriority taskItems OthertaskItems" style="font-weight: bolder; color: #d8d8d8">${task.priority.priority}</li>`;
           }
 
-          taskLists.innerHTML += `<li class="theTitle taskItems">${task.name}</li>`;
-          dateList.innerHTML += `<li class="theDate taskItems">${dateCreated}</li>`;
+          taskLists.innerHTML += `<li class="theTitle taskItems taskNames" data-id="${task.id}"><label class="done">
+          <input type="checkbox">
+          <div class="checkmark"></div>
+        </label>${task.name}</li>`;
+          dateList.innerHTML += `<li class="theDate taskItems OthertaskItems">${dateCreated}</li>`;
         });
+        document.getElementById("toolTip").classList.remove("hide");
       });
-  });
+    });
+
 
 //default on load ends here and now?
 
