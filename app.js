@@ -189,7 +189,6 @@ btnDrop.onclick = () => {
 
       var team_id = item.children[0].children[1].id;
       document.getElementById("workspace_title").dataset.id = team_id;
-      // console.log(document.getElementById("workspace_title").dataset.id);
 
       const spaceList = document.querySelector("#spaceList");
       spaceList.innerHTML = "";
@@ -243,6 +242,23 @@ selectSpace.addEventListener("click", () => {
             folderList.innerHTML += `<li class="folderItems" id="${folder.id}">${folder.name}</li>`;
           });
         });
+        //folderless lists
+        const folderlesslistList = document.querySelector("#folderlesslistList");
+        fetch(`https://obscure-reef-59139.herokuapp.com/folderless/${space_id}/${access_token}
+        `)
+        .then((data) => data.json())
+        .then((result) =>{
+          var array_items = document.querySelectorAll(".folderlessItems");
+          if (array_items.length >= result.lists.length) {
+            console.log("spaces.length exceeded");
+            return;
+          }
+          Array.from(result.lists).forEach((list) => {
+            folderlesslistList.innerHTML += `<li class="folderlessItems" id="${list.id}">${list.name}</li>`;
+          });
+        })
+
+
     });
   });
 });
@@ -258,7 +274,6 @@ selectFolder.addEventListener("click", () => {
     }
     folderItem.addEventListener("click", () => {
       const folder_id = folderItem.id;
-      console.log("bitch", folder_id);
       selectFolder.dataset.id = folderItem.id;
       const listList = document.querySelector("#listList");
       fetch(
@@ -279,6 +294,8 @@ selectFolder.addEventListener("click", () => {
     });
   });
 });
+
+
 
 const selectList = document.querySelector("#selectList");
 selectList.addEventListener("click", () => {
@@ -307,7 +324,6 @@ selectList.addEventListener("click", () => {
         .then((result) => {
           var array_items = document.querySelectorAll(".theTitle");
           if (array_items.length >= result.tasks.length) {
-            console.log("i am exceeding");
             return;
           }
           Array.from(result.tasks).forEach((task) => {
@@ -364,6 +380,96 @@ selectList.addEventListener("click", () => {
     });
   });
 });
+
+//items from loderless lists
+const selectFolderless = document.querySelector("#selectFolderless");
+selectFolderless.addEventListener("click", () => {
+  console.log("selectFolderless clicked");
+  const folderlessItems = document.querySelectorAll(".folderlessItems");
+  Array.from(folderlessItems).forEach((folderlessItem) => {
+    if (document.getElementById("selectFolderless").dataset.id != "") {
+      console.log("i am out");
+      return;
+    }
+    folderlessItem.addEventListener("click", () => {
+      console.log("i am in bitches");
+      const list_id = folderlessItem.id;
+      selectFolderless.dataset.id = list_id;
+      const taskLists = document.querySelector("#taskLists");
+      const dateList = document.querySelector("#dateList");
+      const dueList = document.querySelector("#dueList");
+      const priorityList = document.querySelector("#priorityList");
+      taskLists.innerHTML = "";
+      dateList.innerHTML = "";
+      dueList.innerHTML = "";
+      priorityList.innerHTML = "";
+      let forSortList = document.getElementById("selectFolderless");
+      forSortList.dataset.listId = list_id;
+      fetch(
+        `https://obscure-reef-59139.herokuapp.com/task/${list_id}/${access_token}`
+      )
+        .then((data) => data.json())
+        .then((result) => {
+          var array_items = document.querySelectorAll(".theTitle");
+          if (array_items.length >= result.tasks.length) {
+            return;
+          }
+          Array.from(result.tasks).forEach((task) => {
+            Array.from(task.assignees).forEach((person) => {
+              if (person.email == email_id) {
+                var dateCreated = new Date(
+                  parseInt(task.date_created)
+                ).toLocaleDateString(
+                  "en-IN",
+                  { year: "numeric", month: "short", day: "numeric" },
+                  { timeZone: "Asia/Kolkata" }
+                );
+
+                var dueDate = new Date(
+                  parseInt(task.due_date)
+                ).toLocaleDateString("en-IN", { timeZone: "Asia/Kolkata" });
+                var dueDate_coming = new Date(
+                  parseInt(task.due_date)
+                ).toLocaleDateString(
+                  "en-IN",
+                  { weekday: "long", month: "short", day: "numeric" },
+                  { timeZone: "Asia/Kolkata" }
+                );
+                if (dueDate == "Invalid Date") {
+                  dueDate = "-";
+                }
+                if (parseInt(task.due_date) < Date.now()) {
+                  dueList.innerHTML += `<li class="theDue taskItems" style="color:red">${dueDate}</li>`;
+                } else {
+                  if (dueDate_coming == "Invalid Date") {
+                    dueDate_coming = "-";
+                  }
+
+                  dueList.innerHTML += `<li class="theDue taskItems" style="color:green">${dueDate_coming}</li>`;
+                }
+                if (task.priority == null) {
+                  priorityList.innerHTML += `<li class="thePriority taskItems">${"--"}</li>`;
+                } else if (task.priority.priority == "urgent") {
+                  priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: red">${task.priority.priority}</li>`;
+                } else if (task.priority.priority == "high") {
+                  priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: yellow">${task.priority.priority}</li>`;
+                } else if (task.priority.priority == "normal") {
+                  priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: #6fddff">${task.priority.priority}</li>`;
+                } else if (task.priority.priority == "low") {
+                  priorityList.innerHTML += `<li class="thePriority taskItems" style="font-weight: bolder; color: #d8d8d8">${task.priority.priority}</li>`;
+                }
+
+                taskLists.innerHTML += `<li class="theTitle taskItems">${task.name}</li>`;
+                dateList.innerHTML += `<li class="theDate taskItems">${dateCreated}</li>`;
+              }
+            });
+          });
+        });
+    });
+  });
+});
+
+
 
 //on pressing clear
 const clean = document.querySelector("#clear");
@@ -540,6 +646,11 @@ document.querySelector(".selectSpace").addEventListener("click", () => {
         let selectFolder = document.querySelector(".selectFolder");
         selectFolder.classList.remove("wait");
       }, 1200);
+      setTimeout(() => {
+        let selectFolderLess = document.querySelector(".selectFolderless");
+        selectFolderLess.classList.remove("wait");
+      }, 1200);
+      
     });
   });
 });

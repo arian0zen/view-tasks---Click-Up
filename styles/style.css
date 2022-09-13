@@ -400,6 +400,7 @@ nav ul {
 .spaceItems,
 .folderItems,
 .listItems,
+.folderlessItems,
 .taskItems {
   padding: 0.5em;
   cursor: pointer;
@@ -407,6 +408,7 @@ nav ul {
 .spaceItems,
 .folderItems,
 .listItems,
+.folderlessItems,
 .taskItems {
   border-radius: 3px;
 }
@@ -416,13 +418,16 @@ nav ul {
 .folderItems:hover,
 .listItems:focus,
 .listItems:hover,
+.folderlessItems:focus,
+.folderlessItems:hover,
 .taskItems:focus,
 .taskItems:hover {
   background: #5e5e5e;
 }
 .spaceItems:active,
 .folderItems:active,
-.listItems:active {
+.listItems:active,
+.folderlessItems:active {
   background: #0e0e0e;
 }
 .taskItems {
@@ -469,6 +474,10 @@ ul {
   background: linear-gradient(225deg, #21242a, #1c1f23);
   box-shadow: -7px 7px 17px #0d0f11, 7px -7px 17px #31353d;
 }
+.folderlessListDown{
+  background: linear-gradient(225deg, #25282e, #1c1f23);
+  box-shadow: -7px 7px 17px #0d0f11, 7px -7px 17px #2d2f33;
+}
 
 .selectOpacityNone {
   opacity: 0;
@@ -476,6 +485,7 @@ ul {
 
 .wait {
   pointer-events: none;
+  opacity: 0.4;
 }
 
 /* //main task */

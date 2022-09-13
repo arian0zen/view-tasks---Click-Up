@@ -42,6 +42,22 @@ $(".selectList").click(function (e) {
     listList.slideUp(200);
   });
 });
+var folderlesslistList = $(".folderlesslistList");
+var linkfolderlessList = $("#selectFolderless");
+$(".selectFolderless").click(function (e) {
+  e.preventDefault();
+
+  folderlesslistList.slideToggle(200);
+  folderlesslistList.find("li").click(function () {
+    var text = $(this).html();
+    var id = $(this).attr("id");
+    text = text.substring(0, 15) + "...";
+    var icon = '<i class="downIcon fa fa-chevron-down"></i>';
+    linkfolderlessList.html(text + icon);
+    linkfolderlessList.attr("data-id", id);
+    folderlesslistList.slideUp(200);
+  });
+});
 
 const clear = document.querySelector("#clear");
 clear.addEventListener("click", () => {
@@ -61,6 +77,12 @@ clear.addEventListener("click", () => {
   document.querySelector(
     "#selectList"
   ).dataset.id = '';
+  document.querySelector(
+    "#selectFolderless"
+  ).innerHTML = `Folderless List <i class="downIcon fa fa-chevron-down"></i>`;
+  document.querySelector(
+    "#selectFolderless"
+  ).dataset.id = '';
   const taskLists = document.querySelector("#taskLists");
   const dateList = document.querySelector("#dateList");
   const dueList = document.querySelector("#dueList");
@@ -72,7 +94,9 @@ clear.addEventListener("click", () => {
   const folderList = document.querySelector("#folderList");
   folderList.innerHTML = '';
   const listList = document.querySelector("#listList");
-  listList.innerHTML = ''; 
+  listList.innerHTML = '';
+  const folderlesslistList = document.querySelector("#folderlesslistList");
+  folderlesslistList.innerHTML = ''; 
 });
 
 const viewTasks = document.querySelector(".view_tasks");
