@@ -1,4 +1,3 @@
-
 function setCookie(cname, cvalue, exdays) {
   const d = new Date();
   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
@@ -128,7 +127,6 @@ btnDrop.onclick = () => {
           });
           var array_items = document.querySelectorAll(".theTitle");
           if (array_items.length >= assignedArray.length) {
-            console.log("i am exceeding");
             return;
           }
           assignedArray.forEach((task) => {
@@ -220,14 +218,11 @@ const selectSpace = document.querySelector("#selectSpace");
 selectSpace.addEventListener("click", () => {
   const spaceItems = document.querySelectorAll(".spaceItems");
   Array.from(spaceItems).forEach((spaceItem) => {
-    console.log("here clicked");
     if (document.getElementById("selectSpace").dataset.id != "") {
       return;
     }
     spaceItem.addEventListener("click", () => {
-      console.log("Space Item Clicked");
       const space_id = spaceItem.id;
-      console.log(space_id);
       selectSpace.dataset.id = spaceItem.id;
       const folderList = document.querySelector("#folderList");
       // folderList.innerHTML = '';
@@ -246,23 +241,20 @@ selectSpace.addEventListener("click", () => {
             folderList.innerHTML += `<li class="folderItems" id="${folder.id}">${folder.name}</li>`;
           });
         });
-        //folderless lists
-        const folderlesslistList = document.querySelector("#folderlesslistList");
-        fetch(`https://obscure-reef-59139.herokuapp.com/folderless/${space_id}/${access_token}
+      //folderless lists
+      const folderlesslistList = document.querySelector("#folderlesslistList");
+      fetch(`https://obscure-reef-59139.herokuapp.com/folderless/${space_id}/${access_token}
         `)
         .then((data) => data.json())
-        .then((result) =>{
+        .then((result) => {
           var array_items = document.querySelectorAll(".folderlessItems");
           if (array_items.length >= result.lists.length) {
-            console.log("spaces.length exceeded");
             return;
           }
           Array.from(result.lists).forEach((list) => {
             folderlesslistList.innerHTML += `<li class="folderlessItems" id="${list.id}">${list.name}</li>`;
           });
-        })
-
-
+        });
     });
   });
 });
@@ -298,8 +290,6 @@ selectFolder.addEventListener("click", () => {
     });
   });
 });
-
-
 
 const selectList = document.querySelector("#selectList");
 selectList.addEventListener("click", () => {
@@ -479,8 +469,6 @@ selectFolderless.addEventListener("click", () => {
   });
 });
 
-
-
 //on pressing clear
 const clean = document.querySelector("#clear");
 clean.addEventListener("click", () => {
@@ -637,8 +625,7 @@ fetch(`https://obscure-reef-59139.herokuapp.com/teams/${access_token}`)
         });
         document.getElementById("toolTip").classList.remove("hide");
       });
-    });
-
+  });
 
 //default on load ends here and now?
 
@@ -668,7 +655,6 @@ document.querySelector(".selectSpace").addEventListener("click", () => {
         let selectFolderLess = document.querySelector(".selectFolderless");
         selectFolderLess.classList.remove("wait");
       }, 1200);
-      
     });
   });
 });
@@ -681,6 +667,56 @@ document.querySelector(".selectFolder").addEventListener("click", () => {
         let selectList = document.querySelector(".selectList");
         selectList.classList.remove("wait");
       }, 1200);
+    });
+  });
+});
+
+document.querySelector(".selectList").addEventListener("click", () => {
+  let listItems = document.querySelectorAll(".listItems");
+  Array.from(listItems).forEach((item) => {
+    item.addEventListener("click", () => {
+      console.log("listitem clicked");
+      setTimeout(() => {
+        let selectAssignee = document.querySelector(".selectAssignee");
+        selectAssignee.classList.remove("wait");
+      }, 1200);
+    });
+  });
+});
+document.querySelector(".selectList").addEventListener("click", () => {
+  let listItems = document.querySelectorAll(".listItems");
+  Array.from(listItems).forEach((item) => {
+    item.addEventListener("click", () => {
+      setTimeout(() => {
+        document.querySelector(".enterTaskName").classList.remove("wait");
+
+        document.querySelector(".enterTaskDesc").classList.remove("wait");
+      }, 500);
+    });
+  });
+});
+
+document.querySelector(".selectFolderless").addEventListener("click", () => {
+  let folderlessItems = document.querySelectorAll(".folderlessItems");
+  Array.from(folderlessItems).forEach((item) => {
+    item.addEventListener("click", () => {
+      setTimeout(() => {
+        let selectAssignee = document.querySelector(".selectAssignee");
+        selectAssignee.classList.remove("wait");
+      }, 1200);
+    });
+  });
+});
+
+document.querySelector(".selectFolderless").addEventListener("click", () => {
+  let folderlessItems = document.querySelectorAll(".folderlessItems");
+  Array.from(folderlessItems).forEach((item) => {
+    item.addEventListener("click", () => {
+      setTimeout(() => {
+        document.querySelector(".enterTaskName").classList.remove("wait");
+
+        document.querySelector(".enterTaskDesc").classList.remove("wait");
+      }, 500);
     });
   });
 });

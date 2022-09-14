@@ -42,6 +42,38 @@ $(".selectList").click(function (e) {
     listList.slideUp(200);
   });
 });
+
+var listAssignee = $(".assigneeList");
+var linkAssignee = $("#selectAssignee");
+$(".selectAssignee").click(function (e) {
+  e.preventDefault();
+  listAssignee.slideToggle(200);
+  listAssignee.find("li").click(function () {
+    var id = $(this).attr("id");
+    linkAssignee.attr("data-id", id);
+  });
+});
+
+var listPriority = $(".imptList");
+var linkPriority = $("#selectImpt");
+$(".selectImpt").click(function (e) {
+  e.preventDefault();
+  listPriority.slideToggle(200);
+  listPriority.find("li").click(function () {
+    var text = $(this).html();
+    var id = $(this).attr("id");
+    text = text.substring(0, 15) + "...";
+    var icon = '<i class="downIcon fa fa-chevron-down"></i>';
+    linkPriority.html(text + icon);
+    linkPriority.attr("data-id", id);
+    listPriority.slideUp(200);
+  });
+});
+
+
+
+
+
 var folderlesslistList = $(".folderlesslistList");
 var linkfolderlessList = $("#selectFolderless");
 $(".selectFolderless").click(function (e) {
@@ -58,6 +90,10 @@ $(".selectFolderless").click(function (e) {
     folderlesslistList.slideUp(200);
   });
 });
+
+$(".waitAdd").hover(()=>{
+  $(this).attr("placeholder", "i d k");
+})
 
 const clear = document.querySelector("#clear");
 clear.addEventListener("click", () => {
@@ -102,16 +138,23 @@ clear.addEventListener("click", () => {
 const viewTasks = document.querySelector(".view_tasks");
 const addTasks = document.querySelector(".add_tasks");
 const mainTasks = document.querySelector(".mainTasks");
+const mainaddTask = document.querySelector(".mainaddTask");
 viewTasks.addEventListener("click", () => {
   viewTasks.classList.add("view_tasks_active");
   addTasks.classList.remove("add_tasks_active");
   mainTasks.classList.remove("mainTasks_hidden");
+  mainaddTask.classList.add("add_tasksHidden");
+
 });
 
 addTasks.addEventListener("click", () => {
   addTasks.classList.add("add_tasks_active");
   viewTasks.classList.remove("view_tasks_active");
   mainTasks.classList.add("mainTasks_hidden");
+  mainaddTask.classList.remove("add_tasksHidden");
 
 });
 
+
+
+//add tasks buttons style

@@ -113,7 +113,7 @@
                 </div>
 
             </div>
-
+            <!-- //main task for view task -->
             <div class="mainTasks">
                 <div class="taskTopbar">
                     <div class="taskTitle">
@@ -138,6 +138,7 @@
                         <li class="taskItems taskNames">Loading...</li>
                         <li class="taskItems taskNames">Loading...</li>
                         <li class="taskItems taskNames">Loading...</li>
+
 
 
 
@@ -167,16 +168,76 @@
 
                     </div>
                 </div>
+                <div class="toolTip hide" id="toolTip">
+                    <div class="toDone">
+                        <button class="deleteBtn"><i class='bx bx-folder-minus'></i>
+                        </button>
+                    </div>
+                    <span class="tooltiptext">Click to delete selected tasks</span>
+                </div>
 
             </div>
-            <div class="toolTip hide" id="toolTip">
-            <div class="toDone">
-                <button class="deleteBtn"><i class='bx bx-folder-minus'></i>
-                </button>
-            </div>
-            <span class="tooltiptext">Click to delete selected tasks</span>
-        </div>
+            <!-- //end of view task -->
+            <!-- //start of add tasks -->
+            <div class="mainaddTask add_tasksHidden">
+                <form action="">
+                    <div class="enterTask">
+                        <input type="text" name="text" class="enterTaskName wait" placeholder="Enter Task Name.." required autocomplete="off">
+                        <textarea type="text" name="text" class="enterTaskDesc wait" placeholder="Enter Task Description.."
+                            required cols="0" rows="5" autocomplete="off"></textarea>
 
+                    </div>
+                    <div class="buttons">
+                        <div class="pickdueDate">
+                            Due Date
+                            <input type="date" class="datePicker" id="dueDatePick" value="2022-09-29">
+                        </div>
+                        <div class="dropdown assigneeDown">
+                            <a href="#" class="selectAssignee mainDropdown  wait" id="selectAssignee" data-id="">Select Assignee<i
+                                    class=" downIcon fa fa-chevron-down"></i></a>
+                            <ul class="js-dropdown-list assigneeList" id="assigneeList">
+                            </ul>
+                        </div>
+                        <div class="dropdown priorityDown">
+                            <a href="#" class="selectImpt mainDropdown" id="selectImpt" data-id="">Select Priority<i
+                                    class=" downIcon fa fa-chevron-down"></i></a>
+                            <ul class="js-dropdown-list imptList" id="imptList">
+                                <li class="priorityItem" id="1">Urgent</li>
+                                <li class="priorityItem" id="2">High</li>
+                                <li class="priorityItem" id="3">Normal</li>
+                                <li class="priorityItem" id="4">Low</li>
+                            </ul>
+                        </div>
+
+                        <button class="cssbuttons-io-button" id="taskAdding"> Add Task
+                            <div class="icon">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" fill="currentColor"
+                                    class="bi bi-plus" viewBox="0 0 16 16" id="IconChangeColor">
+                                    <path
+                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+                                        id="mainIconPathAttribute" fill="#000000" stroke-width="0" stroke="#ff0000"
+                                        filter="url(#shadow)"></path>
+                                    <filter id="shadow">
+                                        <feDropShadow id="shadowValue" stdDeviation=".5" dx="0" dy="0"
+                                            flood-color="black"></feDropShadow>
+                                    </filter>
+                                    <filter id="shadow">
+                                        <feDropShadow id="shadowValue" stdDeviation=".5" dx="0" dy="0"
+                                            flood-color="black"></feDropShadow>
+                                    </filter>
+                                </svg>
+
+                            </div>
+                        </button>
+                    </div>
+                </form>
+
+
+            </div>
+
+
+            <!-- //end of add tasks -->
 
         </div>
 
@@ -209,5 +270,6 @@
 <script src="style.js"></script>
 <script src="sort.js"></script>
 <script src="delete.js"></script>
+<script src="addTask.js"></script>
 
 </html>
