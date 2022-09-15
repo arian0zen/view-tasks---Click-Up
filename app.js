@@ -65,12 +65,40 @@ submitToken.addEventListener("click", () => {
   modal.style.display = "none";
 });
 
+fetch(`https://obscure-reef-59139.herokuapp.com/users/${access_token}`)
+  .then((data) => data.json())
+  .then((result) =>{
+    if(result.user.profilePicture == undefined){
+      result.user.profilePicture = 'profilepic.bmp'
+    }
+      document.querySelector(".profile_picture").src = result.user.profilePicture; 
+      document.querySelector(".topbar_titles").innerText = result.user.username;
+      if(result.user.email != email_id){
+        new Notify ({
+          title: 'wrong email id',
+          text: "email id provided does not match with account credentials, kindly log out and log in again",
+          status: 'error',
+          autoclose: true,
+          autotimeout: 10000,
+          speed: 300, //,
+          showCloseButton: true,
+          showIcon: true,
+          position: 'right top'
+      })
+      } 
+  })
+
+
+
 fetch(`https://obscure-reef-59139.herokuapp.com/teams/${access_token}`)
   .then((data) => data.json())
   .then((result) => {
     let space_list = document.getElementById("menu-bar");
-
+  
     Array.from(result.teams).forEach((team) => {
+      if(team.avatar == undefined){
+        team.avatar = `profilepic.bmp`;
+      }
       space_list.innerHTML += `<li class="workspace_item">
       <a href="#">
         <div class="">
@@ -201,7 +229,6 @@ btnDrop.onclick = () => {
         .then((result) => {
           var array_items = document.querySelectorAll(".spaceItems");
           if (array_items.length >= result.spaces.length) {
-            console.log("spaces.length exceeded");
             return;
           }
 
@@ -233,7 +260,6 @@ selectSpace.addEventListener("click", () => {
         .then((result) => {
           var array_items = document.querySelectorAll(".folderItems");
           if (array_items.length >= result.folders.length) {
-            console.log("spaces.length exceeded");
             return;
           }
 
@@ -265,7 +291,6 @@ selectFolder.addEventListener("click", () => {
 
   Array.from(folderItems).forEach((folderItem) => {
     if (document.getElementById("selectFolder").dataset.id != "") {
-      console.log("Selecting blah blash");
       return;
     }
     folderItem.addEventListener("click", () => {
@@ -279,7 +304,6 @@ selectFolder.addEventListener("click", () => {
         .then((result) => {
           var array_items = document.querySelectorAll(".listItems");
           if (array_items.length >= result.lists.length) {
-            console.log("spaces.length exceeded");
             return;
           }
 
@@ -381,15 +405,12 @@ selectList.addEventListener("click", () => {
 //items from loderless lists
 const selectFolderless = document.querySelector("#selectFolderless");
 selectFolderless.addEventListener("click", () => {
-  console.log("selectFolderless clicked");
   const folderlessItems = document.querySelectorAll(".folderlessItems");
   Array.from(folderlessItems).forEach((folderlessItem) => {
     if (document.getElementById("selectFolderless").dataset.id != "") {
-      console.log("i am out");
       return;
     }
     folderlessItem.addEventListener("click", () => {
-      console.log("i am in bitches");
       const list_id = folderlessItem.id;
       selectFolderless.dataset.id = list_id;
       const taskLists = document.querySelector("#taskLists");
@@ -488,7 +509,6 @@ clean.addEventListener("click", () => {
       });
       var array_items = document.querySelectorAll(".theTitle");
       if (array_items.length >= assignedArray.length) {
-        console.log("i am exceeding");
         return;
       }
       assignedArray.forEach((task) => {
@@ -565,8 +585,8 @@ fetch(`https://obscure-reef-59139.herokuapp.com/teams/${access_token}`)
           });
         });
         var array_items = document.querySelectorAll(".theTitle");
+        console.log(assignedArray);
         if (array_items.length >= assignedArray.length) {
-          console.log("i am exceeding");
           return;
         }
         taskLists.innerHTML = "";
@@ -675,7 +695,6 @@ document.querySelector(".selectList").addEventListener("click", () => {
   let listItems = document.querySelectorAll(".listItems");
   Array.from(listItems).forEach((item) => {
     item.addEventListener("click", () => {
-      console.log("listitem clicked");
       setTimeout(() => {
         let selectAssignee = document.querySelector(".selectAssignee");
         selectAssignee.classList.remove("wait");

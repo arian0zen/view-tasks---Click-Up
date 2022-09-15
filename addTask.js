@@ -61,6 +61,7 @@ document.querySelector(".selectFolderless").addEventListener("click", () => {
 const addTask = document.querySelector('#taskAdding');
 addTask.addEventListener('click', (e) => {
     e.preventDefault();
+
     const dueDate = (document.querySelector('#dueDatePick').valueAsNumber);
     const assignedItems = (document.querySelectorAll(".assigneeItem"));
     var assigneedArray = [];
@@ -69,7 +70,10 @@ addTask.addEventListener('click', (e) => {
             assigneedArray.push(person.id);
         }
     });
-    const priority = (document.querySelector("#selectImpt").dataset.id);
+    var priority = (document.querySelector("#selectImpt").dataset.id);
+    if(priority == ""){
+      priority = "4"
+    }
     const taskName = document.querySelector(".enterTaskName").value;
     const taskDesc = document.querySelector(".enterTaskDesc").value;
     var listIdOg = document.querySelector("#selectList").dataset.id || "";
@@ -85,11 +89,36 @@ addTask.addEventListener('click', (e) => {
     fetch(`https://obscure-reef-59139.herokuapp.com/addtask/${access_token}/${listId}/${taskName}?description=${taskDesc}&due_date=${dueDate}&assignees=[${assigneedArray}]&priority=${priority}`)
     .then((data)=> data.json())
     .then((result)=>{
-        console.log(result);
+        if(result.response.err){
+          new Notify ({
+            title: 'Can not add task',
+            text: result.response.err,
+            status: 'error',
+            autoclose: true,
+            autotimeout: 2000,
+            speed: 200, //,
+            showCloseButton: true,
+            showIcon: true,
+            position: 'right top'
+        })
+        } else{
+          new Notify ({
+            title: 'Added Succesfully',
+            text: `task: ${result.response.name} added `,
+            status: 'success',
+            autoclose: true,
+            autotimeout: 3000,
+            speed: 200, //,
+            showCloseButton: true,
+            showIcon: true,
+            position: 'right top'
+        })
+        document.querySelector('.enterTaskName ').value = '';
+        document.querySelector('.enterTaskDesc ').value = '';
+
+        }
     })
-    .then((data) =>{
-      location.reload();
-  })
+
 
     
 });
