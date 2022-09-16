@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="dist/simple-notify.min.css" />
-<script src="dist/simple-notify.min.js"></script>
+    <script src="dist/simple-notify.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -34,8 +34,8 @@
                 <p>Paste the access token only if you wish to grant access to "view task"<br> Remember you can always
                     revoke the access</p>
                 <p>You have to enter twice for security purposes</p>
-                <a href="" class="guide" style="opacity: 1">Do not know how to get access token ?</a>
             </div>
+            <a href="guide/index.html" class="guide">Do not know how to get access token ?</a>
 
         </div>
     </div>
@@ -184,9 +184,11 @@
             <div class="mainaddTask add_tasksHidden">
                 <form action="">
                     <div class="enterTask">
-                        <input type="text" name="text" class="enterTaskName wait" placeholder="Enter Task Name.." required autocomplete="off">
-                        <textarea type="text" name="text" class="enterTaskDesc wait" placeholder="Enter Task Description.."
-                            required cols="0" rows="5" autocomplete="off"></textarea>
+                        <input type="text" name="text" class="enterTaskName wait" placeholder="Enter Task Name.."
+                            required autocomplete="off">
+                        <textarea type="text" name="text" class="enterTaskDesc wait"
+                            placeholder="Enter Task Description.." required cols="0" rows="5"
+                            autocomplete="off"></textarea>
 
                     </div>
                     <div class="buttons">
@@ -195,8 +197,8 @@
                             <input type="date" class="datePicker" id="dueDatePick" value="2022-09-29">
                         </div>
                         <div class="dropdown assigneeDown">
-                            <a href="#" class="selectAssignee mainDropdown  wait" id="selectAssignee" data-id="">Select Assignee<i
-                                    class=" downIcon fa fa-chevron-down"></i></a>
+                            <a href="#" class="selectAssignee mainDropdown  wait" id="selectAssignee" data-id="">Select
+                                Assignee<i class=" downIcon fa fa-chevron-down"></i></a>
                             <ul class="js-dropdown-list assigneeList" id="assigneeList">
                             </ul>
                         </div>

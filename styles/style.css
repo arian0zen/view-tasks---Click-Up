@@ -93,13 +93,12 @@ body {
   margin: 15px 25px;
   text-align: center;
   font-family: "Halvetica", sans-serif;
-  opacity: 0.3;
+  opacity: 0.5;
 }
 .guide{
   text-align: center;
   text-align: center;
   font-family: "Halvetica", sans-serif;
-  opacity: 1;
 }
 
 /* //main content */
