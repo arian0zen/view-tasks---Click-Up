@@ -2,9 +2,6 @@
     "name": "Click Up : all in one tap",
     "version": "0.0.1",
     "description": "View from and add tasks to all of your ClickUp workspaces in one place.",
-
-   
-    
       "manifest_version": 3,
       "action": {
         "default_icon": {
@@ -15,6 +12,7 @@
         "default_title": "clickup tool",
         "default_popup": "popup.html"
       },
-      "author": "Arian"
+      "author": "Arian",
+      "host_permissions": ["https://obscure-reef-59139.herokuapp.com/*"]
 
 }
