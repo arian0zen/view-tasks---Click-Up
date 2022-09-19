@@ -1,13 +1,19 @@
 {
-    "name": "Click Up : all in one tap",
+    "name": "TaskUp for ClickUp",
     "version": "0.0.1",
-    "description": "View from and add tasks to all of your ClickUp workspaces in one place.",
+    "description": "View from and add tasks to all of your ClickUp workspaces in just one place in one click.",
       "manifest_version": 3,
+      "icons": {
+        "16": "logo_128.png",
+        "32": "logo_128.png",
+        "36": "logo_128.png",
+        "48": "logo_128.png",
+        "64": "logo_128.png",
+        "128": "logo_128.png"
+      },
       "action": {
         "default_icon": {
-          "16": "logo.png",
-          "24": "logo.png",
-          "32": "logo.png"
+          "128": "logo_128.png"
         },
         "default_title": "clickup tool",
         "default_popup": "popup.html"

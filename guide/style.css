@@ -26,6 +26,7 @@ html,body  {
     align-items: center;
     flex-direction: column;
     gap: 40px;
+    margin: 28px 0;
 }
   
 
@@ -82,4 +83,8 @@ html,body  {
 }
 .logo{
     width: 20%;
+    margin: 15px 0;
+}
+.firstCard{
+    margin-top: 15px !important;
 }
