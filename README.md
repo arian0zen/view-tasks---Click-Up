@@ -1,4 +1,4 @@
-# What it is ? and what is does ?
+# What it is ? and what it does ?
 - it is `TaskUp for Clickup`
 
 **View from and add tasks to all of your ClickUp workspaces in just one place in one click.**
