@@ -30,6 +30,6 @@ p>
 - Though, I could have used different webPacks to compile a node js code into vanilla js to run in browser but i chose not to.
 
 # Another less important question:
-**- Why did I requesting to a heroku server instead of clickUp official API**
+**- Why am I requesting to a heroku server instead of clickUp official API ?**
 - The answer is every developer's nightmare CORS cross origin policy! For security purposes the browser does not allow xmlHTTP and fetch_API to make cross origin HTTP request to any API end point, that is why I made my own cloud based herokku server and made specific end points for API, that server request data to clickUp and fetches without any issue cause server to server, and in that (heroku server) I made each endpoint to access allow origin universally (*) and thus my extension request to that heroku server and that server brings me data from clickUp. A win win
 
