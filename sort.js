@@ -2,7 +2,7 @@ var access_token = document.cookie.split("&")[1];
   access_token = access_token.split("=")[1];
   access_token = access_token.split("#")[0];
 const sortPriority = document.querySelector(".sort_p");
-fetch(`https://obscure-reef-59139.herokuapp.com/teams/${access_token}`)
+fetch(`https://task-up-hosting.vercel.app/teams/${access_token}`)
   .then((data) => data.json())
   .then((result) => {
     team_id = result.teams[0].id;
@@ -33,7 +33,7 @@ sortPriority.addEventListener("click", () => {
 
   if (selectList.dataset.id == "" && selectFolderless.dataset.id == "") {
     fetch(
-      `https://obscure-reef-59139.herokuapp.com/alltask/${team_id}/${access_token}`
+      `https://task-up-hosting.vercel.app/alltask/${team_id}/${access_token}`
     )
       .then((data) => data.json())
       .then((result) => {
@@ -114,7 +114,7 @@ sortPriority.addEventListener("click", () => {
       });
   }else if(selectFolderless.dataset.id != ""){
     fetch(
-      `https://obscure-reef-59139.herokuapp.com/task/${list_id}/${access_token}`
+      `https://task-up-hosting.vercel.app/task/${list_id}/${access_token}`
     )
       .then((data) => data.json())
       .then((result) => {
@@ -187,7 +187,7 @@ sortPriority.addEventListener("click", () => {
 
   } else {
     fetch(
-      `https://obscure-reef-59139.herokuapp.com/task/${list_id}/${access_token}`
+      `https://task-up-hosting.vercel.app/task/${list_id}/${access_token}`
     )
       .then((data) => data.json())
       .then((result) => {
@@ -286,7 +286,7 @@ sortDue.addEventListener("click", () => {
 
   if (selectList.dataset.id == "" && selectFolderless.dataset.id == "") {
     fetch(
-      `https://obscure-reef-59139.herokuapp.com/alltask/${team_id}/${access_token}`
+      `https://task-up-hosting.vercel.app/alltask/${team_id}/${access_token}`
     )
       .then((data) => data.json())
       .then((result) => {
@@ -360,7 +360,7 @@ sortDue.addEventListener("click", () => {
       });
   }else if(selectFolderless.dataset.id != "") {
     fetch(
-      `https://obscure-reef-59139.herokuapp.com/task/${list_id}/${access_token}`
+      `https://task-up-hosting.vercel.app/task/${list_id}/${access_token}`
     )
       .then((data) => data.json())
       .then((result) => {
@@ -425,7 +425,7 @@ sortDue.addEventListener("click", () => {
       });
   } else {
     fetch(
-      `https://obscure-reef-59139.herokuapp.com/task/${list_id}/${access_token}`
+      `https://task-up-hosting.vercel.app/task/${list_id}/${access_token}`
     )
       .then((data) => data.json())
       .then((result) => {

@@ -6,7 +6,7 @@ document.querySelector(".selectList").addEventListener("click", () => {
     Array.from(listItems).forEach((item) => {
       item.addEventListener("click", () => {
         fetch(
-            `https://obscure-reef-59139.herokuapp.com/listmembers/${item.id}/${access_token}`
+            `https://task-up-hosting.vercel.app/listmembers/${item.id}/${access_token}`
           )
             .then((data) => data.json())
             .then((result) => {
@@ -34,7 +34,7 @@ document.querySelector(".selectFolderless").addEventListener("click", () => {
     Array.from(folderlessItems).forEach((item) => {
       item.addEventListener("click", () => {
         fetch(
-            `https://obscure-reef-59139.herokuapp.com/listmembers/${item.id}/${access_token}`
+            `https://task-up-hosting.vercel.app/listmembers/${item.id}/${access_token}`
           )
             .then((data) => data.json())
             .then((result) => {
@@ -86,7 +86,7 @@ addTask.addEventListener('click', (e) => {
         return;
     }
 
-    fetch(`https://obscure-reef-59139.herokuapp.com/addtask/${access_token}/${listId}/${taskName}?description=${taskDesc}&due_date=${dueDate}&assignees=[${assigneedArray}]&priority=${priority}`)
+    fetch(`https://task-up-hosting.vercel.app/addtask/${access_token}/${listId}/${taskName}?description=${taskDesc}&due_date=${dueDate}&assignees=[${assigneedArray}]&priority=${priority}`)
     .then((data)=> data.json())
     .then((result)=>{
         if(result.response.err){

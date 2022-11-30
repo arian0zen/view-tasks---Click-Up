@@ -1,6 +1,6 @@
 {
     "name": "TaskUp for ClickUp",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "View from and add tasks to all of your ClickUp workspaces in just one place in one click.",
       "manifest_version": 3,
       "icons": {
@@ -19,6 +19,6 @@
         "default_popup": "popup.html"
       },
       "author": "Arian",
-      "host_permissions": ["https://obscure-reef-59139.herokuapp.com/*"]
+      "host_permissions": ["https://task-up-hosting.vercel.app/*"]
 
 }

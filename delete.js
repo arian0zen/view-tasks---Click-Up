@@ -5,7 +5,7 @@ deleteTask.addEventListener("click", ()=>{
     Array.from(tasks).forEach((task)=>{
         if(task.firstElementChild.firstElementChild.checked== true){
             const deletableId = task.dataset.id;
-            fetch(`https://obscure-reef-59139.herokuapp.com/deleteTask/${deletableId}/${access_token}`)
+            fetch(`https://task-up-hosting.vercel.app/deleteTask/${deletableId}/${access_token}`)
             .then((data) => data.json())
             .then((result) =>{
              })

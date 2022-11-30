@@ -65,7 +65,7 @@ submitToken.addEventListener("click", () => {
   modal.style.display = "none";
 });
 
-fetch(`https://obscure-reef-59139.herokuapp.com/users/${access_token}`)
+fetch(`https://task-up-hosting.vercel.app/users/${access_token}`)
   .then((data) => data.json())
   .then((result) =>{
     if(result.user.profilePicture == undefined){
@@ -90,7 +90,7 @@ fetch(`https://obscure-reef-59139.herokuapp.com/users/${access_token}`)
 
 
 
-fetch(`https://obscure-reef-59139.herokuapp.com/teams/${access_token}`)
+fetch(`https://task-up-hosting.vercel.app/teams/${access_token}`)
   .then((data) => data.json())
   .then((result) => {
     let space_list = document.getElementById("menu-bar");
@@ -141,7 +141,7 @@ btnDrop.onclick = () => {
       priorityList.innerHTML = "";
       var team_id = item.children[0].children[1].id;
       fetch(
-        `https://obscure-reef-59139.herokuapp.com/alltask/${team_id}/${access_token}`
+        `https://task-up-hosting.vercel.app/alltask/${team_id}/${access_token}`
       )
         .then((data) => data.json())
         .then((result) => {
@@ -223,7 +223,7 @@ btnDrop.onclick = () => {
       const spaceList = document.querySelector("#spaceList");
       spaceList.innerHTML = "";
       fetch(
-        `https://obscure-reef-59139.herokuapp.com/spaces/${team_id}/${access_token}`
+        `https://task-up-hosting.vercel.app/spaces/${team_id}/${access_token}`
       )
         .then((data) => data.json())
         .then((result) => {
@@ -254,7 +254,7 @@ selectSpace.addEventListener("click", () => {
       const folderList = document.querySelector("#folderList");
       // folderList.innerHTML = '';
       fetch(
-        `https://obscure-reef-59139.herokuapp.com/folder/${space_id}/${access_token}`
+        `https://task-up-hosting.vercel.app/folder/${space_id}/${access_token}`
       )
         .then((data) => data.json())
         .then((result) => {
@@ -269,7 +269,7 @@ selectSpace.addEventListener("click", () => {
         });
       //folderless lists
       const folderlesslistList = document.querySelector("#folderlesslistList");
-      fetch(`https://obscure-reef-59139.herokuapp.com/folderless/${space_id}/${access_token}
+      fetch(`https://task-up-hosting.vercel.app/folderless/${space_id}/${access_token}
         `)
         .then((data) => data.json())
         .then((result) => {
@@ -298,7 +298,7 @@ selectFolder.addEventListener("click", () => {
       selectFolder.dataset.id = folderItem.id;
       const listList = document.querySelector("#listList");
       fetch(
-        `https://obscure-reef-59139.herokuapp.com/list/${folder_id}/${access_token}`
+        `https://task-up-hosting.vercel.app/list/${folder_id}/${access_token}`
       )
         .then((data) => data.json())
         .then((result) => {
@@ -336,7 +336,7 @@ selectList.addEventListener("click", () => {
       let forSortList = document.getElementById("selectList");
       forSortList.dataset.listId = list_id;
       fetch(
-        `https://obscure-reef-59139.herokuapp.com/task/${list_id}/${access_token}`
+        `https://task-up-hosting.vercel.app/task/${list_id}/${access_token}`
       )
         .then((data) => data.json())
         .then((result) => {
@@ -424,7 +424,7 @@ selectFolderless.addEventListener("click", () => {
       let forSortList = document.getElementById("selectFolderless");
       forSortList.dataset.listId = list_id;
       fetch(
-        `https://obscure-reef-59139.herokuapp.com/task/${list_id}/${access_token}`
+        `https://task-up-hosting.vercel.app/task/${list_id}/${access_token}`
       )
         .then((data) => data.json())
         .then((result) => {
@@ -495,7 +495,7 @@ const clean = document.querySelector("#clear");
 clean.addEventListener("click", () => {
   var team_id = document.getElementById("workspace_title").dataset.id;
   fetch(
-    `https://obscure-reef-59139.herokuapp.com/alltask/${team_id}/${access_token}`
+    `https://task-up-hosting.vercel.app/alltask/${team_id}/${access_token}`
   )
     .then((data) => data.json())
     .then((result) => {
@@ -566,13 +566,13 @@ clean.addEventListener("click", () => {
 
 //default on load
 
-fetch(`https://obscure-reef-59139.herokuapp.com/teams/${access_token}`)
+fetch(`https://task-up-hosting.vercel.app/teams/${access_token}`)
   .then((data) => data.json())
   .then((result) => {
     const team_id = result.teams[0].id;
 
     fetch(
-      `https://obscure-reef-59139.herokuapp.com/alltask/${team_id}/${access_token}`
+      `https://task-up-hosting.vercel.app/alltask/${team_id}/${access_token}`
     )
       .then((data) => data.json())
       .then((result) => {
